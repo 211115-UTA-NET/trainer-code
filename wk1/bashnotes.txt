@@ -1,0 +1,18 @@
+pwd - prints the current working dir.
+touch - creates the target file if it doesn't already exist, OR update the date time stamp
+mkdir - create a folder with the specified name and location
+ls - list the contents of the target location
+rm - remove a target file / -r (recursive) remove target folder / -i request a confirmation
+help - display help for the preceding command
+exit - exit the current instance of bash 
+cat - print file contents
+./ - list current location
+.. - parent dir.
+~ - Home dir.
+cd - change dir.
+start - use the default program to open/run a file
+explore - open a file explorer to the target location
+
+
+git 
+clone - creates and initalizes a copy of a remote repo to a local location
