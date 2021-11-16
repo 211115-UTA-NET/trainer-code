@@ -29,3 +29,60 @@ commit - bundle changes before pushing to a repo / -m required to include a comm
 status - display the status the repo, including the files not yet added, added but not comitted, and what commit the repo is on.
 push - send the most recent commit to the repo
 pull - requesting the most recent commit to our local repo
+
+
+
+
+
+conditionals - if/ else-if / else
+
+if - testing if a comparison is true
+else-if - testing if a second comparision is true
+else - if all else fails, do this
+
+== - is a equal to b
+if [ a == b ]; then
+do this stuff
+fi
+
+> or < - if greater or less than
+
+>= or <= - '' or equal to 
+
+!= - if a is not equal to b
+if [ a != b ]; then
+do this stuff
+fi
+
+
+|| - logical or
+
+between two things, only one of these needs to be true.
+
+1 = true/yes/on
+0 = false/no/off
+
+0 || 0 = 0
+1 || 0 = 1
+0 || 1 = 1
+1 || 1 = 1
+
+
+&& - logical and
+
+between two things, both must be true
+
+0 && 0 = 0
+1 && 0 = 0
+0 && 1 = 0
+1 && 1 = 1
+
+
+
+4/2 = 2
+3/2 = 1.5
+
+
+modulus operator
+% - return only the remainder
+3 % 2 = 1
