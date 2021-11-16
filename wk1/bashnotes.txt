@@ -16,3 +16,8 @@ explore - open a file explorer to the target location
 
 git 
 clone - creates and initalizes a copy of a remote repo to a local location
+add - stage files and changes for a commit
+commit - bundle changes before pushing to a repo / -m required to include a commit message
+status - display the status the repo, including the files not yet added, added but not comitted, and what commit the repo is on.
+push - send the most recent commit to the repo
+pull - requesting the most recent commit to our local repo
