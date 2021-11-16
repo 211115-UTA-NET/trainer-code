@@ -12,6 +12,14 @@ cat - print file contents
 cd - change dir.
 start - use the default program to open/run a file
 explore - open a file explorer to the target location
+echo - print string to target (termial if not given)
+> - overwrite contents of target file
+>> - append the contents of target file
+which - print the location/$PATH of the executable
+version - the flag that commonly prints out the version of a utility.
+head - take the first 10 (default) entries of a list / -<number of entries> to specify exact number
+| - redirect the output of the command on the left to the input of the command on the right
+
 
 
 git 
