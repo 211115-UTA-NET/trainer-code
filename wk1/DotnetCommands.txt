@@ -1,0 +1,11 @@
+Dotnet
+
+dotnet new - create a new dotnet project
+	$dotnet new console
+
+dotnet build - build the dotnet project in the current working directory
+	$dotnet build
+
+dotnet run - run the target .dll file, or build and run the project in the curent working directory
+	$dotnet run ./bin/debug/net6.0/MyFirstDotnet.dll
+	$dotnet run 
