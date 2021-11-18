@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "U/MlY2Lz7I4neLucxHfmOb8au4/SAlrAN/wIG6o5vW0KDIk7Tukf+4Sb4na5zIDvOy2kq9zH41NUyDqmAPpIjw==",
+  "success": true,
+  "projectFilePath": "/run/media/richard/Storage-1/Revature/dotnet/211115-dotnet/trainer-code/wk1/CExercises/3_DataTypeAndVariables/3_DataTypeAndVariablesChallenge-StudentCopy/3_DataTypeAndVariablesChallenge.csproj",
+  "expectedPackageFiles": [
+    "/home/richard/.nuget/packages/microsoft.aspnetcore.app.ref/3.1.10/microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
+    "/home/richard/.nuget/packages/microsoft.netcore.app.host.linux-x64/3.1.21/microsoft.netcore.app.host.linux-x64.3.1.21.nupkg.sha512"
+  ],
+  "logs": []
+}

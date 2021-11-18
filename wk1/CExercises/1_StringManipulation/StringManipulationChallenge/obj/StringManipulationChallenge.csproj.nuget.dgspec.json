@@ -1,0 +1,70 @@
+{
+  "format": 1,
+  "restore": {
+    "/run/media/richard/Storage-1/Revature/dotnet/211115-dotnet/V3/DotnetCurriculumCodingChallenges/1_StringManipulation/1_StringManipulationChallenge - StudentCopy/StringManipulationChallenge/StringManipulationChallenge.csproj": {}
+  },
+  "projects": {
+    "/run/media/richard/Storage-1/Revature/dotnet/211115-dotnet/V3/DotnetCurriculumCodingChallenges/1_StringManipulation/1_StringManipulationChallenge - StudentCopy/StringManipulationChallenge/StringManipulationChallenge.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/run/media/richard/Storage-1/Revature/dotnet/211115-dotnet/V3/DotnetCurriculumCodingChallenges/1_StringManipulation/1_StringManipulationChallenge - StudentCopy/StringManipulationChallenge/StringManipulationChallenge.csproj",
+        "projectName": "StringManipulationChallenge",
+        "projectPath": "/run/media/richard/Storage-1/Revature/dotnet/211115-dotnet/V3/DotnetCurriculumCodingChallenges/1_StringManipulation/1_StringManipulationChallenge - StudentCopy/StringManipulationChallenge/StringManipulationChallenge.csproj",
+        "packagesPath": "/home/richard/.nuget/packages/",
+        "outputPath": "/run/media/richard/Storage-1/Revature/dotnet/211115-dotnet/V3/DotnetCurriculumCodingChallenges/1_StringManipulation/1_StringManipulationChallenge - StudentCopy/StringManipulationChallenge/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/richard/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.10, 3.1.10]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.linux-x64",
+              "version": "[3.1.21, 3.1.21]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.100/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

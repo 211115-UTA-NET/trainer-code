@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "eCXdIJh2/kQ5xmtqCn8lh54OE0NnI3l1Q+eb+SWqNOmiuGCnt9hfSJeAEKZE7KekRw1+8qVcg+YeF+z1ispDfg==",
+  "success": true,
+  "projectFilePath": "/run/media/richard/Storage-1/Revature/dotnet/211115-dotnet/V3/DotnetCurriculumCodingChallenges/1_StringManipulation/1_StringManipulationChallenge - StudentCopy/StringManipulationChallenge/StringManipulationChallenge.csproj",
+  "expectedPackageFiles": [
+    "/home/richard/.nuget/packages/microsoft.aspnetcore.app.ref/3.1.10/microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
+    "/home/richard/.nuget/packages/microsoft.netcore.app.host.linux-x64/3.1.21/microsoft.netcore.app.host.linux-x64.3.1.21.nupkg.sha512"
+  ],
+  "logs": []
+}
