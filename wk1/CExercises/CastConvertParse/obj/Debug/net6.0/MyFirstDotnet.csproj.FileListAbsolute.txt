@@ -1,0 +1,15 @@
+C:\Users\RichardHawkins\Revature\RichardH\MyFirstDotnet\bin\Debug\net6.0\MyFirstDotnet.exe
+C:\Users\RichardHawkins\Revature\RichardH\MyFirstDotnet\bin\Debug\net6.0\MyFirstDotnet.deps.json
+C:\Users\RichardHawkins\Revature\RichardH\MyFirstDotnet\bin\Debug\net6.0\MyFirstDotnet.runtimeconfig.json
+C:\Users\RichardHawkins\Revature\RichardH\MyFirstDotnet\bin\Debug\net6.0\MyFirstDotnet.dll
+C:\Users\RichardHawkins\Revature\RichardH\MyFirstDotnet\bin\Debug\net6.0\ref\MyFirstDotnet.dll
+C:\Users\RichardHawkins\Revature\RichardH\MyFirstDotnet\bin\Debug\net6.0\MyFirstDotnet.pdb
+C:\Users\RichardHawkins\Revature\RichardH\MyFirstDotnet\obj\Debug\net6.0\MyFirstDotnet.csproj.AssemblyReference.cache
+C:\Users\RichardHawkins\Revature\RichardH\MyFirstDotnet\obj\Debug\net6.0\MyFirstDotnet.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\RichardHawkins\Revature\RichardH\MyFirstDotnet\obj\Debug\net6.0\MyFirstDotnet.AssemblyInfoInputs.cache
+C:\Users\RichardHawkins\Revature\RichardH\MyFirstDotnet\obj\Debug\net6.0\MyFirstDotnet.AssemblyInfo.cs
+C:\Users\RichardHawkins\Revature\RichardH\MyFirstDotnet\obj\Debug\net6.0\MyFirstDotnet.csproj.CoreCompileInputs.cache
+C:\Users\RichardHawkins\Revature\RichardH\MyFirstDotnet\obj\Debug\net6.0\MyFirstDotnet.dll
+C:\Users\RichardHawkins\Revature\RichardH\MyFirstDotnet\obj\Debug\net6.0\ref\MyFirstDotnet.dll
+C:\Users\RichardHawkins\Revature\RichardH\MyFirstDotnet\obj\Debug\net6.0\MyFirstDotnet.pdb
+C:\Users\RichardHawkins\Revature\RichardH\MyFirstDotnet\obj\Debug\net6.0\MyFirstDotnet.genruntimeconfig.cache

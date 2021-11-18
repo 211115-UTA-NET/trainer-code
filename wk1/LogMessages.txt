@@ -1,0 +1,15 @@
+
+
+Debug - a useful development tool to confirm or verify the status or operation of your code.
+Info - important information about the regular operation of a program or service.
+Trace - useful information about actions taken leading up to a an error or fatal error.
+Warnings - notifies the users of some oddity - versions depreciated, line ending
+Errors - anything fatal to an operation, but not to the entire application
+Fatal/Critical - any error that is forcing the full shutdown of an application/service
+
+
+
+
+
+Exceptions - a problem that arises during the execution of a program, that provides
+	a way to transfer control from one part of a aprogram to another
