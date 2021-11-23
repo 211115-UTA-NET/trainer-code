@@ -1,0 +1,15 @@
+C:\Users\RichardHawkins\Revature\trainer-code\wk2\Functions\bin\Debug\net6.0\Functions.exe
+C:\Users\RichardHawkins\Revature\trainer-code\wk2\Functions\bin\Debug\net6.0\Functions.deps.json
+C:\Users\RichardHawkins\Revature\trainer-code\wk2\Functions\bin\Debug\net6.0\Functions.runtimeconfig.json
+C:\Users\RichardHawkins\Revature\trainer-code\wk2\Functions\bin\Debug\net6.0\Functions.dll
+C:\Users\RichardHawkins\Revature\trainer-code\wk2\Functions\bin\Debug\net6.0\ref\Functions.dll
+C:\Users\RichardHawkins\Revature\trainer-code\wk2\Functions\bin\Debug\net6.0\Functions.pdb
+C:\Users\RichardHawkins\Revature\trainer-code\wk2\Functions\obj\Debug\net6.0\Functions.csproj.AssemblyReference.cache
+C:\Users\RichardHawkins\Revature\trainer-code\wk2\Functions\obj\Debug\net6.0\Functions.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\RichardHawkins\Revature\trainer-code\wk2\Functions\obj\Debug\net6.0\Functions.AssemblyInfoInputs.cache
+C:\Users\RichardHawkins\Revature\trainer-code\wk2\Functions\obj\Debug\net6.0\Functions.AssemblyInfo.cs
+C:\Users\RichardHawkins\Revature\trainer-code\wk2\Functions\obj\Debug\net6.0\Functions.csproj.CoreCompileInputs.cache
+C:\Users\RichardHawkins\Revature\trainer-code\wk2\Functions\obj\Debug\net6.0\Functions.dll
+C:\Users\RichardHawkins\Revature\trainer-code\wk2\Functions\obj\Debug\net6.0\ref\Functions.dll
+C:\Users\RichardHawkins\Revature\trainer-code\wk2\Functions\obj\Debug\net6.0\Functions.pdb
+C:\Users\RichardHawkins\Revature\trainer-code\wk2\Functions\obj\Debug\net6.0\Functions.genruntimeconfig.cache
