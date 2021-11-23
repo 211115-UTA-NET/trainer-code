@@ -15,6 +15,6 @@ Your application could also (stretch goals):
 -Store a calculation history to a file.
 -Accept inputs from a file, perform the required operations, then ouput those results to a file.
 
-You should expect to present your functioning project to the rest of the batch on Wednesday 11/30. Your presentation should be between 3 and 7 minutes, and should include a demonstration of your application running.
+You should expect to present your functioning project to the rest of the batch on Tuesday 11/30. Your presentation should be between 3 and 7 minutes, and should include a demonstration of your application running.
 
 This is an individual effort project. While you are encouraged to work together with the other associates in your batch, your work must be your own. Plagerism of any work not your own will not be tolerated.
