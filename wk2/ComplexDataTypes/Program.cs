@@ -17,7 +17,7 @@
     PrintArray(arraytwo);
 }
 
-static void PrintArray( int[] Array)
+static void PrintArray(int[] Array)
 {
     for( int i = 0; i < Array.Length; i++)
     {
