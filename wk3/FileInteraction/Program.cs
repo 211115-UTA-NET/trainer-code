@@ -11,7 +11,7 @@ string path = "./testFile.txt";
 string[] text = {"hi", "hello", "How's it going" };
 
 File.AppendAllLines(path, text);
-
+// File.WriteAllLite(path, text);
 
 
 
