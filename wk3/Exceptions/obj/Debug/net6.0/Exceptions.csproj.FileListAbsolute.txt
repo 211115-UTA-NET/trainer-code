@@ -1,0 +1,15 @@
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\Exceptions\bin\Debug\net6.0\Exceptions.exe
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\Exceptions\bin\Debug\net6.0\Exceptions.deps.json
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\Exceptions\bin\Debug\net6.0\Exceptions.runtimeconfig.json
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\Exceptions\bin\Debug\net6.0\Exceptions.dll
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\Exceptions\bin\Debug\net6.0\ref\Exceptions.dll
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\Exceptions\bin\Debug\net6.0\Exceptions.pdb
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\Exceptions\obj\Debug\net6.0\Exceptions.csproj.AssemblyReference.cache
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\Exceptions\obj\Debug\net6.0\Exceptions.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\Exceptions\obj\Debug\net6.0\Exceptions.AssemblyInfoInputs.cache
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\Exceptions\obj\Debug\net6.0\Exceptions.AssemblyInfo.cs
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\Exceptions\obj\Debug\net6.0\Exceptions.csproj.CoreCompileInputs.cache
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\Exceptions\obj\Debug\net6.0\Exceptions.dll
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\Exceptions\obj\Debug\net6.0\ref\Exceptions.dll
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\Exceptions\obj\Debug\net6.0\Exceptions.pdb
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\Exceptions\obj\Debug\net6.0\Exceptions.genruntimeconfig.cache

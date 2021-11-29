@@ -1,0 +1,15 @@
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\FileInteraction\bin\Debug\net6.0\FileInteraction.exe
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\FileInteraction\bin\Debug\net6.0\FileInteraction.deps.json
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\FileInteraction\bin\Debug\net6.0\FileInteraction.runtimeconfig.json
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\FileInteraction\bin\Debug\net6.0\FileInteraction.dll
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\FileInteraction\bin\Debug\net6.0\ref\FileInteraction.dll
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\FileInteraction\bin\Debug\net6.0\FileInteraction.pdb
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\FileInteraction\obj\Debug\net6.0\FileInteraction.csproj.AssemblyReference.cache
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\FileInteraction\obj\Debug\net6.0\FileInteraction.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\FileInteraction\obj\Debug\net6.0\FileInteraction.AssemblyInfoInputs.cache
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\FileInteraction\obj\Debug\net6.0\FileInteraction.AssemblyInfo.cs
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\FileInteraction\obj\Debug\net6.0\FileInteraction.csproj.CoreCompileInputs.cache
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\FileInteraction\obj\Debug\net6.0\FileInteraction.dll
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\FileInteraction\obj\Debug\net6.0\ref\FileInteraction.dll
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\FileInteraction\obj\Debug\net6.0\FileInteraction.pdb
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\FileInteraction\obj\Debug\net6.0\FileInteraction.genruntimeconfig.cache
