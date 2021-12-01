@@ -13,7 +13,7 @@ namespace SampleNamespace
     //function declaration
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            // Console.WriteLine("Hello World!");
 
             // Person newGuy = new Person();
             // newGuy.Introduce();
@@ -25,9 +25,19 @@ namespace SampleNamespace
             // newGuy.setFirstName("Stefan");
             // Console.WriteLine(newGuy.getFirstName());
 
-            Employee Kyler = new Employee(40, 18.50, "Kyler", "Dennis");
-            Kyler.doWork();
-            Kyler.Introduce();
+            // Employee Kyler = new Employee(40, 18.50, "Kyler", "Dennis");
+            // Kyler.doWork();
+            // Kyler.Introduce();
+
+            Trainee Melinda = new Trainee();
+            Melinda.doWork();
+            Melinda.Introduce();
+            Console.WriteLine(Melinda.getInTraining());
+
+            Customer Howard = new Customer(200, "Howard", "Wen");
+            Howard.Introduce();
+            Console.WriteLine(Howard.CashOnHand);
+
         }
     }
 }
