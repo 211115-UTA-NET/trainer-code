@@ -1,0 +1,15 @@
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\AbstractClasses\bin\Debug\net6.0\AbstractClasses.exe
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\AbstractClasses\bin\Debug\net6.0\AbstractClasses.deps.json
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\AbstractClasses\bin\Debug\net6.0\AbstractClasses.runtimeconfig.json
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\AbstractClasses\bin\Debug\net6.0\AbstractClasses.dll
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\AbstractClasses\bin\Debug\net6.0\ref\AbstractClasses.dll
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\AbstractClasses\bin\Debug\net6.0\AbstractClasses.pdb
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\AbstractClasses\obj\Debug\net6.0\AbstractClasses.csproj.AssemblyReference.cache
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\AbstractClasses\obj\Debug\net6.0\AbstractClasses.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\AbstractClasses\obj\Debug\net6.0\AbstractClasses.AssemblyInfoInputs.cache
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\AbstractClasses\obj\Debug\net6.0\AbstractClasses.AssemblyInfo.cs
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\AbstractClasses\obj\Debug\net6.0\AbstractClasses.csproj.CoreCompileInputs.cache
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\AbstractClasses\obj\Debug\net6.0\AbstractClasses.dll
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\AbstractClasses\obj\Debug\net6.0\ref\AbstractClasses.dll
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\AbstractClasses\obj\Debug\net6.0\AbstractClasses.pdb
+C:\Users\RichardHawkins\Revature\trainer-code\wk3\AbstractClasses\obj\Debug\net6.0\AbstractClasses.genruntimeconfig.cache
