@@ -1,0 +1,19 @@
+# .gitignore allows us to only add the relevent files to a repository, and leave out the bloat.
+# Use .gitignore to NOT add system-specific files (the file that are created by YOUR system/computer
+# when you write your program.)
+
+
+
+# comment with "#"
+# Try to group the things you will ignore by type, or relevent program
+
+# Filetypes
+*.docx
+*.log
+*.lock
+# use the "*" character as a wildcard, meaning "Anything that could go here"
+
+
+
+# .vscode
+.vscode/*

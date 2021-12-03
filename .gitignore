@@ -1,9 +1,0 @@
-# comment with "#"
-
-*.docx
-*.log
-*.lock
-
-
-# .vscode
-.vscode/*
