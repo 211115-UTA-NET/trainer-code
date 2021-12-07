@@ -1,43 +1,42 @@
-﻿//Using statements 
+﻿using System;
 
-using System;
-using System.IO;
-using System.Collections.Generic;
-
-//Namespace
-namespace SampleNamespace
+namespace classes
 {
-//Class declaration
     class Program
     {
-    //function declaration
         static void Main(string[] args)
         {
-            // Console.WriteLine("Hello World!");
+            var account = new BankAccount("<name>", 1000);
+            Console.WriteLine($"Account {account.Number} was created for {account.Owner} with {account.Balance} balance.");
 
-            // Person newGuy = new Person();
-            // newGuy.Introduce();
+            account.MakeWithdrawal(500, DateTime.Now, "Rent payment");
+            Console.WriteLine(account.Balance);
+            account.MakeDeposit(100, DateTime.Now, "friend paid me back");
+            Console.WriteLine(account.Balance);
 
-            // Person someOtherPerson = new Person("Tommy", "Nguyen");
-            // someOtherPerson.Introduce();
+            Console.WriteLine(account.GetAccountHistory());
 
-            // Console.WriteLine(newGuy.getFirstName());
-            // newGuy.setFirstName("Stefan");
-            // Console.WriteLine(newGuy.getFirstName());
+            // Test that the initial balances must be positive:
+            try
+            {
+                var invalidAccount = new BankAccount("invalid", -55);
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                Console.WriteLine("Exception caught creating account with negative balance");
+                Console.WriteLine(e.ToString());
+            }
 
-            // Employee Kyler = new Employee(40, 18.50, "Kyler", "Dennis");
-            // Kyler.doWork();
-            // Kyler.Introduce();
-
-            Trainee Melinda = new Trainee();
-            Melinda.doWork();
-            Melinda.Introduce();
-            Console.WriteLine(Melinda.getInTraining());
-
-            Customer Howard = new Customer(200, "Howard", "Wen");
-            Howard.Introduce();
-            Console.WriteLine(Howard.CashOnHand);
-
+            // Test for a negative balance
+            try
+            {
+                account.MakeWithdrawal(750, DateTime.Now, "Attempt to overdraw");
+            }
+            catch (InvalidOperationException e)
+            {
+                Console.WriteLine("Exception caught trying to overdraw");
+                Console.WriteLine(e.ToString());
+            }
         }
     }
 }
