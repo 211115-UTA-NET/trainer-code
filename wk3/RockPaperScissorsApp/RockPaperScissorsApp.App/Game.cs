@@ -82,6 +82,7 @@ namespace RockPaperScissorsApp.App
                 Console.WriteLine($"You {result}!");
             }
         }
+
         public void Summary()
         {
             var summary = new System.Text.StringBuilder();
