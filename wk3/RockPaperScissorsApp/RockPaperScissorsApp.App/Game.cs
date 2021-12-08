@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace RockPaperScissorsApp.APP
+namespace RockPaperScissorsApp.App
 {
     public class Game
     {

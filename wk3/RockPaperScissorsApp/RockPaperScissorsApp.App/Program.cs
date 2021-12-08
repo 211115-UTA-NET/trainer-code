@@ -16,9 +16,10 @@
  * - In general, we want to write something simple
  *   but in a way that allows for extending it/generalizing it in the future.
  */
+
 using System.Xml.Serialization;
 
-namespace RockPaperScissorsApp.APP
+namespace RockPaperScissorsApp.App
 {
     public class Program
     {

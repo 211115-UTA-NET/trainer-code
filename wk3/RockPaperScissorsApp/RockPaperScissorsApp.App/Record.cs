@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RockPaperScissorsApp.APP
+namespace RockPaperScissorsApp.App
 {
     public class Record
     {
