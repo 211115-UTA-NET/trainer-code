@@ -61,21 +61,51 @@ namespace RockPaperScissorsApp.APP
         // but... some objects contain/handle resources outside the CLR (e.g. file system, network).
         //  e.g. StreamReader opening a file.
         // for those, you have to explicitly call the Close or Dispose method.
+        // typically you do this in a finally block to be 100% sure that it will be called in all cases.
+        // .NET has a special interface called IDisposable that basically tells you
+        //     this is a class that needs to be Disposed when you're done.
 
-        private static List<Record>? ReadHistoryFromFile(string filePath)
+        private static List<Record>? ReadHistoryFromFileOld(string filePath)
         {
             XmlSerializer serializer = new(typeof(List<Record>));
+            StreamReader? reader = null;
             try
             {
-                StreamReader reader = new(filePath);
-                List<Record>? records = (List<Record>?)serializer.Deserialize(reader);
-                reader.Close();
+                reader = new(filePath);
+                var records = (List<Record>?)serializer.Deserialize(reader);
                 return records;
             }
             catch (FileNotFoundException)
             {
                 return null;
             }
+            finally
+            {
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+            }
+        }
+
+
+        private static List<Record>? ReadHistoryFromFile(string filePath)
+        {
+            XmlSerializer serializer = new(typeof(List<Record>));
+            // using statement can be a block, or just one line
+            using (StreamReader? reader = new(filePath))
+            {
+                try
+                {
+                    var records = (List<Record>?)serializer.Deserialize(reader);
+                    return records;
+                }
+                catch (FileNotFoundException)
+                {
+                    return null;
+                }
+            }
+            // at this point, it's been disposed
         }
     }
 }
