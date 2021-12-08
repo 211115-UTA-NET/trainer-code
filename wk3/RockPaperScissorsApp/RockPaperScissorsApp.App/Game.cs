@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace RockPaperScissorsApp.APP
 {
@@ -11,6 +12,9 @@ namespace RockPaperScissorsApp.APP
         private List<Record> allRecords = new List<Record>();
         public string PlayerName { get; }
         private string[] RPS = { "Rock", "Paper", "Scissor" };
+
+        public XmlSerializer Serializer { get; } = new(typeof(List<Record>));
+
         // constructor
         public Game(string playerName, List<Record>? allRecords = null)
         {
@@ -94,8 +98,10 @@ namespace RockPaperScissorsApp.APP
 
         public string SerializeAsXml()
         {
-            // todo
-            return "";
+            var stringWriter = new StringWriter();
+            Serializer.Serialize(stringWriter, allRecords);
+            stringWriter.Close();
+            return stringWriter.ToString();
         }
     }
 }

@@ -16,6 +16,8 @@
  * - In general, we want to write something simple
  *   but in a way that allows for extending it/generalizing it in the future.
  */
+using System.Xml.Serialization;
+
 namespace RockPaperScissorsApp.APP
 {
     public class Program
@@ -29,7 +31,8 @@ namespace RockPaperScissorsApp.APP
                 Console.Write("Enter an valid username: ");
                 name = Console.ReadLine();
             }
-            var game = new Game(name);
+            List<Record>? records = ReadHistoryFromFile("../../../history.xml");
+            Game game = new(name, records);
             Console.WriteLine($"[ Welcome Player {game.PlayerName}. ]");
             while (true)
             {
@@ -44,7 +47,7 @@ namespace RockPaperScissorsApp.APP
             }
             Console.WriteLine("--- Game Records ---");
             game.Summary();
-            //WriteHistoryToFile(game);
+            WriteHistoryToFile(game, "../../../history.xml");
         }
 
         private static void WriteHistoryToFile(Game game, string filePath)
@@ -53,12 +56,26 @@ namespace RockPaperScissorsApp.APP
             File.WriteAllText(filePath, xml);
         }
 
-        private static List<Record>? ReadHistoryFromFile(Game game, string filePath)
+        // any objects inside the CLR are automatically cleaned up by the garbage collector
+        // when we're done with them.
+        // but... some objects contain/handle resources outside the CLR (e.g. file system, network).
+        //  e.g. StreamReader opening a file.
+        // for those, you have to explicitly call the Close or Dispose method.
+
+        private static List<Record>? ReadHistoryFromFile(string filePath)
         {
-            string xml = File.ReadAllText(filePath);
-            // todo
-            List<Record>? records = null;
-            return records;
+            XmlSerializer serializer = new(typeof(List<Record>));
+            try
+            {
+                StreamReader reader = new(filePath);
+                List<Record>? records = (List<Record>?)serializer.Deserialize(reader);
+                reader.Close();
+                return records;
+            }
+            catch (FileNotFoundException)
+            {
+                return null;
+            }
         }
     }
 }
