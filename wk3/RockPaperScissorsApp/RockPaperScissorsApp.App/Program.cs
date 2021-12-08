@@ -1,44 +1,49 @@
-﻿// app to play rock-paper-scissors with the computer
-
-// required features:
-// - play multiple rounds
-// - get a summary/record of all the rounds played so far
-
-// stretch goal features:
-// - persistence (save data somehow, it will remember past game history) (and clear history)
-// - play more complex variants of RPS (like RPS+lizard+spock)
-// - logging (to help with debugging the app if something goes wrong)
-// - some way to have more than 2 players at a time
-// - support both player vs player and player vs computer
-// - difficulty settings for the computer (remembers your moves and tries to predict)
-
-// - in general, we want to write something simple
-//    but in a way that allows for extending it / generalizing it in the future.
-
-namespace RockPaperScissorsApp.App
+﻿/* 
+ * play RPS with AI/Computer
+ * required features:
+ * - play multiple rounds
+ * - get a summary/record of all the rounds played so far
+ * 
+ * stretch goal features:
+ * - persistence (save data somehow, it will remember past game history)
+ * - play more complex variants of RPS (like RPS+lizard+spock)
+ * - logging (to help with debugging the app if something goes wrong)
+ * - more than 2 players
+ * - support both player vs player and player vs computer
+ * - difficulty settings for the computer (remembers your moves and tries to predict)
+ * - timmer limit
+ * 
+ * - In general, we want to write something simple
+ *   but in a way that allows for extending it/generalizing it in the future.
+ */
+namespace RockPaperScissorsApp.APP
 {
     public class Program
     {
-        public static void Main()
+        public static void Main(string[] args)
         {
             Console.WriteLine("Welcome to RockPaperScissors App");
-
-            var game = new Game();
-
+            string? name = null;
+            while (name == null || name.Length<=0)
+            {
+                Console.Write("Enter an valid username: ");
+                name = Console.ReadLine();
+            }
+            var game = new Game(name);
+            Console.WriteLine($"[ Welcome Player {game.PlayerName}. ]");
             while (true)
             {
                 Console.WriteLine();
-                Console.WriteLine("Play a round? (y/n) ");
-
+                Console.Write("Play a round? (y/n) ");
                 string? input = Console.ReadLine();
-
-                if (input != "y") { break; }
-
+                if (input == null || input.ToLower() != "y") {
+                    Console.WriteLine("--- End of the Game ---");
+                    break;
+                }
                 game.PlayRound();
             }
-
-            string summary = game.Summary;
-            Console.WriteLine(summary);
+            Console.WriteLine("--- Game Records ---");
+            game.Summary();
         }
     }
 }
