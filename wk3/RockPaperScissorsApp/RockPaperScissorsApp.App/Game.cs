@@ -8,13 +8,17 @@ namespace RockPaperScissorsApp.APP
 {
     public class Game
     {
-        List<Record> allRecords = new List<Record>();
+        private List<Record> allRecords = new List<Record>();
         public string PlayerName { get; }
         private string[] RPS = { "Rock", "Paper", "Scissor" };
         // constructor
-        public Game(string playerName)
+        public Game(string playerName, List<Record>? allRecords = null)
         {
             this.PlayerName = playerName;
+            if (allRecords != null)
+            {
+                this.allRecords = allRecords;
+            }
         }
         public void PlayRound()
         {
@@ -86,6 +90,12 @@ namespace RockPaperScissorsApp.APP
             summary.AppendLine("---------------------------------------------------------------");
             
             Console.WriteLine(summary.ToString());
+        }
+
+        public string SerializeAsXml()
+        {
+            // todo
+            return "";
         }
     }
 }

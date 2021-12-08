@@ -1,9 +1,9 @@
-﻿/* 
+﻿/*
  * play RPS with AI/Computer
  * required features:
  * - play multiple rounds
  * - get a summary/record of all the rounds played so far
- * 
+ *
  * stretch goal features:
  * - persistence (save data somehow, it will remember past game history)
  * - play more complex variants of RPS (like RPS+lizard+spock)
@@ -12,7 +12,7 @@
  * - support both player vs player and player vs computer
  * - difficulty settings for the computer (remembers your moves and tries to predict)
  * - timmer limit
- * 
+ *
  * - In general, we want to write something simple
  *   but in a way that allows for extending it/generalizing it in the future.
  */
@@ -44,6 +44,21 @@ namespace RockPaperScissorsApp.APP
             }
             Console.WriteLine("--- Game Records ---");
             game.Summary();
+            //WriteHistoryToFile(game);
+        }
+
+        private static void WriteHistoryToFile(Game game, string filePath)
+        {
+            string xml = game.SerializeAsXml();
+            File.WriteAllText(filePath, xml);
+        }
+
+        private static List<Record>? ReadHistoryFromFile(Game game, string filePath)
+        {
+            string xml = File.ReadAllText(filePath);
+            // todo
+            List<Record>? records = null;
+            return records;
         }
     }
 }
