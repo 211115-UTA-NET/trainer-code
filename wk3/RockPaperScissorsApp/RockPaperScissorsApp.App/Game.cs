@@ -14,7 +14,7 @@ namespace RockPaperScissorsApp.App
         public string PlayerName { get; }
         private string[] RPS = { "Rock", "Paper", "Scissor" };
 
-        public XmlSerializer Serializer { get; } = new(typeof(List<Serialization.Record>));
+        public XmlSerializer Serializer { get; } = new(typeof(List<Xml.Record>));
 
         // constructor
         public Game(string playerName, List<Record>? allRecords = null)
@@ -25,6 +25,7 @@ namespace RockPaperScissorsApp.App
                 this.allRecords = allRecords;
             }
         }
+
         public void PlayRound()
         {
             Console.WriteLine("1. Rock\n2. Paper\n3. Scissor");
@@ -72,7 +73,10 @@ namespace RockPaperScissorsApp.App
         }
         private void AddRecord(int pc, int player, string result)
         {
-            var record = new Record(DateTime.Now, RPS[pc - 1], RPS[player - 1], result);
+            Move move1 = (Move)Enum.Parse(typeof(Move), RPS[pc - 1]);
+            Move move2 = (Move)Enum.Parse(typeof(Move), RPS[player - 1]);
+
+            var record = new Record(DateTime.Now, move1, move2);
             allRecords.Add(record);
             if (result == "A Tie")
             {
@@ -86,12 +90,12 @@ namespace RockPaperScissorsApp.App
 
         public void Summary()
         {
-            var summary = new System.Text.StringBuilder();
+            var summary = new StringBuilder();
             summary.AppendLine($"Date\t\t\tComputer\t{PlayerName}\t\tResult");
             summary.AppendLine("---------------------------------------------------------------");
             foreach (var record in allRecords)
             {
-                summary.AppendLine($"{record.Date}\t{record.PC}\t\t{record.Player}\t\t{record.result}");
+                summary.AppendLine($"{record.Date}\t{record.Player1}\t\t{record.Player2}\t\t{record.Result}");
             }
             summary.AppendLine("---------------------------------------------------------------");
             
@@ -113,9 +117,9 @@ namespace RockPaperScissorsApp.App
                 xmlRecords.Add(new Xml.Record
                 {
                     When = record.Date,
-                    PlayerMove = record.Player,
-                    CPUMove = record.PC,
-                    Result = record.result
+                    PlayerMove = record.Player1.ToString(),
+                    CPUMove = record.Player2.ToString(),
+                    Result = record.Result.ToString()
                 });
             }
 

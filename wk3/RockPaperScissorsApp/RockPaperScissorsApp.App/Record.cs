@@ -22,24 +22,42 @@ namespace RockPaperScissorsApp.App
         // ex: [ 10/7 Computer: Rock VS You: Paper => You Win! ]
         public DateTime Date { get; }
 
-        public string PC { get; }
-        public string Player { get; }
-        public string result { get; }
+        public Move Player1 { get; }
+        public Move Player2 { get; }
+        public RoundResult Result => EvaluateResult(Player1, Player2);
+
         // constructor
-        public Record(DateTime date, string pc, string player, string result)
+        public Record(DateTime date, Move player1, Move player2)
         {
-            this.Date = date;
-            this.PC = pc;
-            this.Player = player;
-            this.result = result;
+            Date = date;
+            Player1 = player1;
+            Player2 = player2;
         }
 
+        // assigns the CPU move to player 1
         public Record(Serialization.Record xmlRecord)
         {
             Date = xmlRecord.When;
-            PC = xmlRecord.CPUMove ?? throw new ArgumentException("CPU move cannot be null", nameof(xmlRecord));
-            Player = xmlRecord.PlayerMove ?? throw new ArgumentException("Player move cannot be null", nameof(xmlRecord));
-            result = xmlRecord.Result ?? throw new ArgumentException("Result cannot be null", nameof(xmlRecord));
+            Player1 = (Move)Enum.Parse(typeof(Move), xmlRecord.CPUMove ?? throw new ArgumentException("CPU move cannot be null", nameof(xmlRecord)));
+            Player2 = (Move)Enum.Parse(typeof(Move), xmlRecord.PlayerMove ?? throw new ArgumentException("Player move cannot be null", nameof(xmlRecord)));
+        }
+
+        // result from perspective of player 1
+        public static RoundResult EvaluateResult(Move player1, Move player2)
+        {
+            // C# lately supports nice things
+            //  pattern matching syntax, switch expression, tuples
+            return (player1, player2) switch
+            {
+                (Move.Rock, Move.Scissors) => RoundResult.Win,
+                (Move.Scissors, Move.Rock) => RoundResult.Loss,
+                (Move.Paper, Move.Rock) => RoundResult.Win,
+                (Move.Rock, Move.Paper) => RoundResult.Loss,
+                (Move.Scissors, Move.Paper) => RoundResult.Win,
+                (Move.Paper, Move.Scissors) => RoundResult.Loss,
+                (var m, var m2) when m == m2 => RoundResult.Tie,
+                _ => throw new InvalidOperationException(),
+            };
         }
     }
 }
