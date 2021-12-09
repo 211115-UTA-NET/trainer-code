@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
-
-namespace RockPaperScissorsApp.App
+﻿namespace RockPaperScissorsApp.App
 {
-    public class Record
+    public class Round
     {
         // XmlSerializer (and often other serializers)
         // expect classes that have a zero-argument constructor
@@ -27,7 +20,7 @@ namespace RockPaperScissorsApp.App
         public RoundResult Result => EvaluateResult(Player1, Player2);
 
         // constructor
-        public Record(DateTime date, Move player1, Move player2)
+        public Round(DateTime date, Move player1, Move player2)
         {
             Date = date;
             Player1 = player1;
@@ -35,7 +28,7 @@ namespace RockPaperScissorsApp.App
         }
 
         // assigns the CPU move to player 1
-        public Record(Serialization.Record xmlRecord)
+        public Round(Serialization.Record xmlRecord)
         {
             Date = xmlRecord.When;
             Player1 = (Move)Enum.Parse(typeof(Move), xmlRecord.CPUMove ?? throw new ArgumentException("CPU move cannot be null", nameof(xmlRecord)));

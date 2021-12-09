@@ -10,14 +10,14 @@ namespace RockPaperScissorsApp.App
 {
     public class Game
     {
-        private List<Record> allRecords = new List<Record>();
+        private List<Round> allRecords = new List<Round>();
         public string PlayerName { get; }
         private string[] RPS = { "Rock", "Paper", "Scissor" };
 
         public XmlSerializer Serializer { get; } = new(typeof(List<Xml.Record>));
 
         // constructor
-        public Game(string playerName, List<Record>? allRecords = null)
+        public Game(string playerName, List<Round>? allRecords = null)
         {
             this.PlayerName = playerName;
             if (allRecords != null)
@@ -76,7 +76,7 @@ namespace RockPaperScissorsApp.App
             Move move1 = (Move)Enum.Parse(typeof(Move), RPS[pc - 1]);
             Move move2 = (Move)Enum.Parse(typeof(Move), RPS[player - 1]);
 
-            var record = new Record(DateTime.Now, move1, move2);
+            var record = new Round(DateTime.Now, move1, move2);
             allRecords.Add(record);
             if (result == "A Tie")
             {
@@ -106,7 +106,7 @@ namespace RockPaperScissorsApp.App
         {
             var xmlRecords = new List<Xml.Record>();
 
-            foreach (Record record in allRecords)
+            foreach (Round record in allRecords)
             {
                 //var xml = new Xml.Record();
                 //xml.When = record.Date;

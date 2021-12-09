@@ -46,7 +46,7 @@ namespace RockPaperScissorsApp.App
                 //GC.Collect();
                 name = Console.ReadLine();
             }
-            List<Record>? records = ReadHistoryFromFile("../../../history.xml");
+            List<Round>? records = ReadHistoryFromFile("../../../history.xml");
             Game game = new(name, records);
             Console.WriteLine($"[ Welcome Player {game.PlayerName}. ]");
             while (true)
@@ -81,14 +81,14 @@ namespace RockPaperScissorsApp.App
         // .NET has a special interface called IDisposable that basically tells you
         //     this is a class that needs to be Disposed when you're done.
 
-        private static List<Record>? ReadHistoryFromFileOld(string filePath)
+        private static List<Round>? ReadHistoryFromFileOld(string filePath)
         {
-            XmlSerializer serializer = new(typeof(List<Record>));
+            XmlSerializer serializer = new(typeof(List<Round>));
             StreamReader? reader = null;
             try
             {
                 reader = new(filePath);
-                var records = (List<Record>?)serializer.Deserialize(reader);
+                var records = (List<Round>?)serializer.Deserialize(reader);
                 return records;
             }
             catch (FileNotFoundException)
@@ -104,7 +104,7 @@ namespace RockPaperScissorsApp.App
             }
         }
 
-        private static List<Record>? ReadHistoryFromFile(string filePath)
+        private static List<Round>? ReadHistoryFromFile(string filePath)
         {
             XmlSerializer serializer = new(typeof(List<Serialization.Record>));
 
@@ -119,7 +119,7 @@ namespace RockPaperScissorsApp.App
                 if (records is null) throw new InvalidDataException();
 
                 // sneak peak into nice advanced feature called LINQ, using lambda expression delegates
-                return records.Select(x => new Record(x)).ToList();
+                return records.Select(x => new Round(x)).ToList();
             }
 
             catch (IOException)
