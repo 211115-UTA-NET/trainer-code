@@ -20,14 +20,11 @@ namespace RockPaperScissorsApp.App
         // they're there for some other code to notice them and make some change to their own behavior
 
         // ex: [ 10/7 Computer: Rock VS You: Paper => You Win! ]
-        [XmlAttribute(AttributeName = "When")]
-        public DateTime Date { get; set; }
+        public DateTime Date { get; }
 
-        [XmlElement(ElementName = "CPUMove")]
-        public string PC { get; set; }
-        [XmlElement(ElementName = "PlayerMove")]
-        public string Player { get; set; }
-        public string result { get; set; }
+        public string PC { get; }
+        public string Player { get; }
+        public string result { get; }
         // constructor
         public Record(DateTime date, string pc, string player, string result)
         {
@@ -37,8 +34,12 @@ namespace RockPaperScissorsApp.App
             this.result = result;
         }
 
-        public Record()
+        public Record(Serialization.Record xmlRecord)
         {
+            Date = xmlRecord.When;
+            PC = xmlRecord.CPUMove ?? throw new ArgumentException("CPU move cannot be null", nameof(xmlRecord));
+            Player = xmlRecord.PlayerMove ?? throw new ArgumentException("Player move cannot be null", nameof(xmlRecord));
+            result = xmlRecord.Result ?? throw new ArgumentException("Result cannot be null", nameof(xmlRecord));
         }
     }
 }

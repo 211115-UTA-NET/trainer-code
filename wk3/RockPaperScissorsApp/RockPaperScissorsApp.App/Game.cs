@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using Xml = RockPaperScissorsApp.App.Serialization;
 
 namespace RockPaperScissorsApp.App
 {
@@ -13,7 +14,7 @@ namespace RockPaperScissorsApp.App
         public string PlayerName { get; }
         private string[] RPS = { "Rock", "Paper", "Scissor" };
 
-        public XmlSerializer Serializer { get; } = new(typeof(List<Record>));
+        public XmlSerializer Serializer { get; } = new(typeof(List<Serialization.Record>));
 
         // constructor
         public Game(string playerName, List<Record>? allRecords = null)
@@ -99,8 +100,27 @@ namespace RockPaperScissorsApp.App
 
         public string SerializeAsXml()
         {
+            var xmlRecords = new List<Xml.Record>();
+
+            foreach (Record record in allRecords)
+            {
+                //var xml = new Xml.Record();
+                //xml.When = record.Date;
+                //xml.PlayerMove = record.Player;
+                //xml.CPUMove = record.PC;
+                //xml.Result = record.result;
+                // "property initializer" syntax - call a constructor & set properties in one go.
+                xmlRecords.Add(new Xml.Record
+                {
+                    When = record.Date,
+                    PlayerMove = record.Player,
+                    CPUMove = record.PC,
+                    Result = record.result
+                });
+            }
+
             var stringWriter = new StringWriter();
-            Serializer.Serialize(stringWriter, allRecords);
+            Serializer.Serialize(stringWriter, xmlRecords);
             stringWriter.Close();
             return stringWriter.ToString();
         }

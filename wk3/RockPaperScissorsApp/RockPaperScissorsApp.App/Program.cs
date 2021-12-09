@@ -34,6 +34,8 @@ namespace RockPaperScissorsApp.App
             while (name == null || name.Length <= 0)
             {
                 Console.Write("Enter an valid username: ");
+                Thread.Sleep(1000);
+                //GC.Collect();
                 name = Console.ReadLine();
             }
             List<Record>? records = ReadHistoryFromFile("../../../history.xml");
@@ -44,7 +46,7 @@ namespace RockPaperScissorsApp.App
                 Console.WriteLine();
                 Console.Write("Play a round? (y/n) ");
                 string? input = Console.ReadLine();
-                if (input == null || input.ToLower() == "y")
+                if (input == null || input.ToLower() != "y")
                 {
                     Console.WriteLine("--- End of the Game ---");
                     break;
@@ -94,10 +96,9 @@ namespace RockPaperScissorsApp.App
             }
         }
 
-
         private static List<Record>? ReadHistoryFromFile(string filePath)
         {
-            XmlSerializer serializer = new(typeof(List<Record>));
+            XmlSerializer serializer = new(typeof(List<Serialization.Record>));
 
             try
             {
@@ -106,9 +107,13 @@ namespace RockPaperScissorsApp.App
                 // goes out of scope
                 using StreamReader reader = new(filePath);
 
-                var records = (List<Record>?)serializer.Deserialize(reader);
-                return records;
+                var records = (List<Serialization.Record>?)serializer.Deserialize(reader);
+                if (records is null) throw new InvalidDataException();
+
+                // sneak peak into nice advanced feature called LINQ, using lambda expression delegates
+                return records.Select(x => new Record(x)).ToList();
             }
+
             catch (IOException)
             {
                 return null;

@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace RockPaperScissorsApp.App
 {
-    public class BaseClass
+    public interface MyInterface
+    {
+        public int Data { get; set; }
+    }
+
+    public class BaseClass : MyInterface
     {
         public virtual int Data { get; set; }
 
@@ -27,8 +32,10 @@ namespace RockPaperScissorsApp.App
     public class CastingDemo
     {
         // making use of polymorphism
-        private static void PrintData(BaseClass a)
+        private static void PrintData(MyInterface a)
         {
+            Console.WriteLine(a.Data);
+
             Console.WriteLine(((DerivedClass)a).MoreData); // explicit cast (downcasting)
 
             if (a is DerivedClass d) // safe way to do that ^
@@ -65,8 +72,16 @@ namespace RockPaperScissorsApp.App
             Console.WriteLine(AddInts((int)d, (int)d));
             // implicit casting (numeric), because it won't lose any data
             Console.WriteLine(AddDoubles(i, i));
+
+            short x1 = 3;
+            short x2 = 3;
+            AddInts((int)x1, (int)x2);
         }
 
+        public static int AddInts(short a, short b)
+        {
+            return a + b;
+        }
 
         public static int AddInts(int a, int b)
         {
