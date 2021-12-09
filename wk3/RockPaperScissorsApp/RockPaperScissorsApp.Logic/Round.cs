@@ -1,4 +1,4 @@
-﻿namespace RockPaperScissorsApp.App
+﻿namespace RockPaperScissorsApp.Logic
 {
     public class Round
     {
@@ -28,12 +28,6 @@
         }
 
         // assigns the CPU move to player 1
-        public Round(Serialization.Record xmlRecord)
-        {
-            Date = xmlRecord.When;
-            Player1 = (Move)Enum.Parse(typeof(Move), xmlRecord.CPUMove ?? throw new ArgumentException("CPU move cannot be null", nameof(xmlRecord)));
-            Player2 = (Move)Enum.Parse(typeof(Move), xmlRecord.PlayerMove ?? throw new ArgumentException("Player move cannot be null", nameof(xmlRecord)));
-        }
 
         // result from perspective of player 1
         public static RoundResult EvaluateResult(Move player1, Move player2)

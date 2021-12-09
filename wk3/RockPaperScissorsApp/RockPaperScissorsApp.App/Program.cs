@@ -19,6 +19,7 @@
 
 using System.Diagnostics;
 using System.Xml.Serialization;
+using RockPaperScissorsApp.Logic;
 
 namespace RockPaperScissorsApp.App
 {
@@ -119,7 +120,7 @@ namespace RockPaperScissorsApp.App
                 if (records is null) throw new InvalidDataException();
 
                 // sneak peak into nice advanced feature called LINQ, using lambda expression delegates
-                return records.Select(x => new Round(x)).ToList();
+                return records.Select(x => x.CreateRound()).ToList();
             }
 
             catch (IOException)
