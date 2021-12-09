@@ -17,17 +17,21 @@
  *   but in a way that allows for extending it/generalizing it in the future.
  */
 
+using System.Diagnostics;
 using System.Xml.Serialization;
 
 namespace RockPaperScissorsApp.App
 {
     public class Program
     {
+
         public static void Main(string[] args)
         {
+            //CastingDemo.NumericCasting();
+            CastingDemo.NonNumericCasting();
             Console.WriteLine("Welcome to RockPaperScissors App");
             string? name = null;
-            while (name == null || name.Length<=0)
+            while (name == null || name.Length <= 0)
             {
                 Console.Write("Enter an valid username: ");
                 name = Console.ReadLine();
@@ -40,7 +44,8 @@ namespace RockPaperScissorsApp.App
                 Console.WriteLine();
                 Console.Write("Play a round? (y/n) ");
                 string? input = Console.ReadLine();
-                if (input == null || input.ToLower() != "y") {
+                if (input == null || input.ToLower() == "y")
+                {
                     Console.WriteLine("--- End of the Game ---");
                     break;
                 }
@@ -93,20 +98,21 @@ namespace RockPaperScissorsApp.App
         private static List<Record>? ReadHistoryFromFile(string filePath)
         {
             XmlSerializer serializer = new(typeof(List<Record>));
-            // using statement can be a block, or just one line
-            using (StreamReader? reader = new(filePath))
+
+            try
             {
-                try
-                {
-                    var records = (List<Record>?)serializer.Deserialize(reader);
-                    return records;
-                }
-                catch (FileNotFoundException)
-                {
-                    return null;
-                }
+                // using statement can be a block, or just one line
+                // if it's one line, the dispose happens whenever the variable
+                // goes out of scope
+                using StreamReader reader = new(filePath);
+
+                var records = (List<Record>?)serializer.Deserialize(reader);
+                return records;
             }
-            // at this point, it's been disposed
+            catch (IOException)
+            {
+                return null;
+            }
         }
     }
 }

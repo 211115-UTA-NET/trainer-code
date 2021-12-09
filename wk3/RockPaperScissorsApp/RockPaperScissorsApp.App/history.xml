@@ -1,8 +1,1 @@
-<?xml version="1.0" encoding="utf-16"?>
-<ArrayOfRecord xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Record When="0001-01-01T00:00:00">
-    <CPUMove>Scissor</CPUMove>
-    <PlayerMove>Rock</PlayerMove>
-    <result>Lose</result>
-  </Record>
-</ArrayOfRecord>
+<?xml version="1.0" encoding="utf-16"?><ArrayOfRecord xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Record When="0001-01-01T00:00:00"><CPUMove>Scissor</CPUMove><PlayerMove>Rock</PlayerMove><result>Lose</result></Record></ArrayOfRecord>
