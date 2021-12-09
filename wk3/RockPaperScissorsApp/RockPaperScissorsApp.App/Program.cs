@@ -48,7 +48,8 @@ namespace RockPaperScissorsApp.App
                 name = Console.ReadLine();
             }
             List<Round>? records = ReadHistoryFromFile("../../../history.xml");
-            Game game = new(name, records);
+            IMoveDecider moveDecider = new RandomMoveDecider();
+            Game game = new(name, moveDecider, records);
             Console.WriteLine($"[ Welcome Player {game.PlayerName}. ]");
             while (true)
             {

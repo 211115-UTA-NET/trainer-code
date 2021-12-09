@@ -32,7 +32,7 @@ namespace RockPaperScissorsApp.App
     public class CastingDemo
     {
         // making use of polymorphism
-        private static void PrintData(MyInterface a)
+        private static void PrintData(BaseClass a)
         {
             Console.WriteLine(a.Data);
 

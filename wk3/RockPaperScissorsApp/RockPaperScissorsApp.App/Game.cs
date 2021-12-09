@@ -13,14 +13,15 @@ namespace RockPaperScissorsApp.App
     {
         private List<Round> allRecords = new List<Round>();
         public string PlayerName { get; }
-        private string[] RPS = { "Rock", "Paper", "Scissor" };
+        private readonly IMoveDecider cpuMoveDecider;
 
         public XmlSerializer Serializer { get; } = new(typeof(List<Xml.Record>));
 
         // constructor
-        public Game(string playerName, List<Round>? allRecords = null)
+        public Game(string playerName, IMoveDecider cpuMoveDecider, List<Round>? allRecords = null)
         {
-            this.PlayerName = playerName;
+            PlayerName = playerName;
+            this.cpuMoveDecider = cpuMoveDecider;
             if (allRecords != null)
             {
                 this.allRecords = allRecords;
@@ -46,22 +47,19 @@ namespace RockPaperScissorsApp.App
                 }
             }
 
-            Random random = new Random();
-            int PCchoice = random.Next(1, 4);
+            //Random random = new Random();
+            //Move PCchoice = (Move)random.Next(3); // 0, 1 or 2
+            Move pcChoice = cpuMoveDecider.DecideMove();
             Console.WriteLine();
-            string pc = RPS[PCchoice - 1];
-            string playerMove = RPS[player - 1];
+            Move playerMove = (Move)(player - 1);
             Console.WriteLine($"You choose [{playerMove}]");
-            Console.WriteLine($"PC gives you a [{pc}]");
-            AddRecord(pc, playerMove);
+            Console.WriteLine($"PC gives you a [{pcChoice}]");
+            AddRecord(pcChoice, playerMove);
         }
 
-        private void AddRecord(string pc, string player)
+        private void AddRecord(Move pc, Move player)
         {
-            Move move1 = (Move)Enum.Parse(typeof(Move), pc);
-            Move move2 = (Move)Enum.Parse(typeof(Move), player);
-
-            var record = new Round(DateTime.Now, move1, move2);
+            var record = new Round(DateTime.Now, player, pc);
             allRecords.Add(record);
             Console.WriteLine($"You have a {record.Result}!");
         }
