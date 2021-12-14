@@ -1,0 +1,11 @@
+-- Create a Books Table
+
+CREATE TABLE Books
+(
+	Title VARCHAR(250) PRIMARY KEY,
+	Author VARCHAR(100) NOT NULL,
+	Pages INT NOT NULL,
+	Thickness VARCHAR(10) NOT NULL,
+	GenreID INT NOT NULL,
+	PublisherID INT NOT NULL,
+)
