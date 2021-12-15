@@ -19,17 +19,17 @@ CREATE TABLE Books
 	Author VARCHAR(100) FOREIGN KEY REFERENCES Authors(Author) NOT NULL,
 	Pages INT NOT NULL,
 	Thickness VARCHAR(10) NOT NULL,
-	GenreID INT NOT NULL,
+	GenreID INT FOREIGN KEY REFERENCES Genres(ID) NOT NULL,
 	PublisherID INT NOT NULL,
 );
 
 --Create the Format-Price Table *Composite KEY!*
 CREATE TABLE FormatPrice
 (
-	Title VARCHAR(250) NOT NULL,
+	Title VARCHAR(250) FOREIGN KEY REFERENCES Books(Title) NOT NULL,
 	PrintFormat VARCHAR(50) NOT NULL,
 	Price MONEY NOT NULL,
-	PRIMARY KEY (Title, PrintFormat)
+	PRIMARY KEY (Title, PrintFormat),
 );
 
 
@@ -111,8 +111,6 @@ SELECT * FROM Books WHERE Thickness!='Thick';
 
 
 
-
-
 --Return more data from other tables with a "JOIN"
 
 --Inner Join
@@ -137,7 +135,7 @@ SELECT * FROM Books WHERE Thickness!='Thick';
 -- RIGHT JOIN
 -- Returns all records from the "Right" table, even if there are not matching records in the "Left" table.
 
--- SELECT column_name
+-- niSELECT column_name
 -- FROM Table_A
 -- LEFT JOIN Table_B
 -- ON Table_A.column_name = Table_B.column_Name;
@@ -159,3 +157,51 @@ SELECT * FROM Books WHERE Thickness!='Thick';
 -- FROM TableA A, TableA B
 -- WHERE A.columnA <> B.columnB
 -- And A.columnC = B.columnC;
+
+
+--UNIQUE - every value in the specified column is different
+--NOT NULL - ever record (row) must have the specified column filled
+
+--UNIQUE and NOT NULL are part of a columns eligibility to be a PRIMARY KEY
+
+--IDENTITY - the SQL Server way to automatically increment the next record(row) in the specified column
+
+--CREATE TABLE People
+-- (
+-- 	ID INT IDENTITY(1, 1) PRIMARY KEY,
+--  LastName VARCHAR(255) NOT NULL,
+--  FirstName VARCHAR(255) NOT NULL
+-- )
+
+--IDENTITY(_,_) - start counting at, increment by
+
+-- INSERT People
+-- (LastName, FirstName)
+-- VALUES
+-- ('Schweers', 'Stefan'),
+-- ('Cicio', 'Edward');
+
+--DATES
+--DATE, DATETIME, SMALLDATE, TIMESTAMP
+--YYYY-MM-DD, YYYY-MM-DD HH:mm:ss, YYYY-MM-DD HH:mm:ss, unique
+
+
+
+--WHERE... AND/OR/NOT
+--and/or/not allows us o refine the results of a select where statement
+
+-- SELECT column1, column2
+-- FROM TableA 
+-- WHERE Condition1 AND Condition2 OR Condition3
+-- WHERE Condition1 OR Condition2 AND Condition3
+-- WHERE NOT Condition1 AND Condition2
+
+
+
+--ORDER - gives us a way to sort the results of a query.
+--ASC|DESC return order ascending or descending
+
+SELECT * FROM Books 
+ORDER BY Author , Pages DESC;
+
+
