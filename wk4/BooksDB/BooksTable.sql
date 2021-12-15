@@ -37,21 +37,20 @@ CREATE TABLE FormatPrice
 --VERB NOUN <NAME>, VERB <NAME> <TYPE> <Mods>
 ALTER TABLE Genres ADD Genre VARCHAR(100) NOT NULL;
 
---DROP to delete/remove something from a table/database
---VERB NOUN <NAME>, VERB NOUN <NAME>
-ALTER TABLE Genres DROP COLUMN Genre;
-
-DROP TABLE Genres;
-
 --Modify a table to REMOVE the NOT NULL property from a field.
 ALTER TABLE Books ALTER COLUMN Pages INT NOT NULL;
 
 --Create a Primary Key as an alteration
 ALTER TABLE FormatPrice ADD PRIMARY KEY (Title, PrintFormat);
 
+--DROP to delete/remove something from a table/database
+--VERB NOUN <NAME>, VERB NOUN <NAME>
+ALTER TABLE Genres DROP COLUMN Genre;
+DROP TABLE Genres;
+
+
 --Rename a table?
 --ALTER TABLE Genres CHANGE COLUMN Genre TO Genre2;
-
 
 --Create a Foreign Key as an alteration
 ALTER TABLE Books ADD FOREIGN KEY (Author) REFERENCES Authors(Author);
@@ -73,13 +72,11 @@ VALUES
 	(1,'Tutorial'),
 	(2,'Popular Science');
 
-
 INSERT Authors
 	(Author, AuthorNationality)
 VALUES
 	('Chad Russell', 'American'),
 	('E.F.Codd', 'British');
-
 
 INSERT Books
 	(Title, Author, Pages, Thickness, GenreID, PublisherID)
@@ -87,7 +84,6 @@ VALUES
 	('Beginning MySQL Database Design and Optimization', 'Chad Russell', 520, 'Thick', 1, 1),
 	('The Relational Model for Database Management: Version 2', 'E.F.Codd', 538, 'Thick', 2, 2),
 	('Chads New Book', 'Chad Russell', 20, 'Thin', 2, 1);
-
 
 INSERT FormatPrice
 	(Title, PrintFormat, Price)
@@ -108,11 +104,58 @@ SELECT Author FROM Books;
 
 SELECT Title, Author, Pages FROM Books;
 
---SELECT WHERE
-
+--SELECT WHERE - add filter to a SELECT
 SELECT * FROM Books WHERE Author='Chad Russell';
 
 SELECT * FROM Books WHERE Thickness!='Thick';
 
 
---Combine tables with a "JOIN"
+
+
+
+--Return more data from other tables with a "JOIN"
+
+--Inner Join
+--Selects all rows from both tables, as long as there is a batch between the columns.
+--If there are records in "Table A" that do not have a matching record in "Table B", they are not shown
+
+-- SELECT column_name
+-- FROM Table_A
+-- INNER JOIN Table_B
+-- ON Table_A.column_name = Table_B.column_Name;
+
+
+-- LEFT JOIN
+-- Returns all records from the "Left" table, even if there are not matching records in the "Right" table
+
+-- SELECT column_name
+-- FROM Table_A
+-- LEFT JOIN Table_B
+-- ON Table_A.column_name = Table_B.column_Name;
+
+
+-- RIGHT JOIN
+-- Returns all records from the "Right" table, even if there are not matching records in the "Left" table.
+
+-- SELECT column_name
+-- FROM Table_A
+-- LEFT JOIN Table_B
+-- ON Table_A.column_name = Table_B.column_Name;
+
+
+-- FULL JOIN
+-- Returns all records when there is a match in "Left" or "Right" table.
+
+-- SELECT column_name
+-- FROM Table_A
+-- FULL OUTER JOIN Table_B
+-- ON Table_A.column_name = Table_B.column_Name;
+
+
+-- SELF JOIN
+-- Returns a table that has been formed by joining a table with itself.
+
+-- SELECT A.columnA, B.columnB, A.columnC
+-- FROM TableA A, TableA B
+-- WHERE A.columnA <> B.columnB
+-- And A.columnC = B.columnC;
