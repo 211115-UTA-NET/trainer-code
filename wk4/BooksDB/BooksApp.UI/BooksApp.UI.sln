@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32002.185
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooksApp.UI", "BooksApp.UI\BooksApp.UI.csproj", "{E324BC9B-F176-4A7A-AEEC-0FB6E8E42AB9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E324BC9B-F176-4A7A-AEEC-0FB6E8E42AB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E324BC9B-F176-4A7A-AEEC-0FB6E8E42AB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E324BC9B-F176-4A7A-AEEC-0FB6E8E42AB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E324BC9B-F176-4A7A-AEEC-0FB6E8E42AB9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {910B0301-AA73-44F2-B3EA-7FDC2B5491EE}
+	EndGlobalSection
+EndGlobal

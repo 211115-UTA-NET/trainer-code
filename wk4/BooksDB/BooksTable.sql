@@ -307,3 +307,51 @@ DECLARE @rows INT;
 EXECUTE UpdateBooksDateModified 100, @rows OUTPUT;
 SELECT @rows;
 SELECT * FROM Books;
+
+-- TRIGGERS
+
+-- triggers are blocks of statements that can run AFTER or INSTEAD OF
+-- an INSERT, UPDATE, or DELETE on a particular table.
+
+-- in C#, properties let you interject some validation or transforming of data in the setter
+-- this is a little like that
+
+-- equiv of the check constraint on books.pages:
+GO
+CREATE OR ALTER TRIGGER Books_PositivePages ON Books
+INSTEAD OF INSERT -- should also cover the update case
+AS 
+BEGIN
+    --PRINT 'insertion not allowed';
+    -- inside a trigger you have access to two table-valued variables: Inserted & Deleted
+    -- these show the inserted rows, or the deleted rows
+    -- or, if it's an update, Deleted will have the old versions of the rows;
+    --   and Inserted will have the new versions
+    IF (EXISTS(SELECT Pages FROM Inserted WHERE Pages <= 0))
+    BEGIN;
+        THROW 50000, 'pages must be greater than 0', 1;
+    END
+    INSERT INTO Books
+    SELECT * FROM Inserted; -- something's wrong here, not sure what
+END
+
+GO
+INSERT INTO Books
+	(Title, Author, Pages, GenreID, PublisherID)
+VALUES
+	('Asdf', 'Chad Russell', -520, 1, 1);
+SELECT * FROM Books;
+
+GO
+CREATE OR ALTER TRIGGER Books_DateModified ON Books
+AFTER UPDATE
+AS 
+BEGIN
+    UPDATE Books
+    SET DateModified = SYSDATETIMEOFFSET()
+    WHERE Title IN (SELECT Title FROM Inserted);
+END
+
+SELECT * FROM Books;
+
+UPDATE Books SET PublisherID = 3 WHERE PublisherID = 2;
