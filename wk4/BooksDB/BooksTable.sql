@@ -318,6 +318,7 @@ SELECT * FROM Books;
 
 -- equiv of the check constraint on books.pages:
 GO
+--DROP TRIGGER Books_PositivePages;
 CREATE OR ALTER TRIGGER Books_PositivePages ON Books
 INSTEAD OF INSERT -- should also cover the update case
 AS 
@@ -355,3 +356,5 @@ END
 SELECT * FROM Books;
 
 UPDATE Books SET PublisherID = 3 WHERE PublisherID = 2;
+
+INSERT INTO Books (Title, Pages) VALUES ('asdf', 20);
