@@ -57,6 +57,11 @@ namespace RockPaperScissorsApp.App
             AddRecord(pcChoice, playerMove);
         }
 
+        /// <summary>
+        /// Add a round record to this game's memory
+        /// </summary>
+        /// <param name="pc">The move played by the PC in that round</param>
+        /// <param name="player">The move played by the player in that round</param>
         private void AddRecord(Move pc, Move player)
         {
             var record = new Round(DateTime.Now, player, pc);
