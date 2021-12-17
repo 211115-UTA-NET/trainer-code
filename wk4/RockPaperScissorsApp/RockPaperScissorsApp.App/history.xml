@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ArrayOfRecord xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Record When="0001-01-01T00:00:00">
+    <CPUMove>Rock</CPUMove>
+    <PlayerMove>Scissors</PlayerMove>
+    <Result>Loss</Result>
+  </Record>
+  <Record When="2021-12-09T12:02:48.5244295-06:00">
+    <CPUMove>Paper</CPUMove>
+    <PlayerMove>Rock</PlayerMove>
+    <Result>Loss</Result>
+  </Record>
+  <Record When="2021-12-09T13:55:15.64202-06:00">
+    <CPUMove>Rock</CPUMove>
+    <PlayerMove>Rock</PlayerMove>
+    <Result>Tie</Result>
+  </Record>
+</ArrayOfRecord>
