@@ -43,7 +43,7 @@ namespace RockPaperScissorsApp.App
             while (name == null || name.Length <= 0)
             {
                 Console.Write("Enter an valid username: ");
-                Thread.Sleep(1000);
+                //Thread.Sleep(1000);
                 //GC.Collect();
                 name = Console.ReadLine();
             }

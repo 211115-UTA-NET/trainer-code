@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RockPaperScissorsApp.App", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RockPaperScissorsApp.Tests", "RockPaperScissorsApp.Tests\RockPaperScissorsApp.Tests.csproj", "{D62E768F-54A1-4FDF-BED9-22E77E1B8FA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RockPaperScissorsApp.Logic", "RockPaperScissorsApp.Logic\RockPaperScissorsApp.Logic.csproj", "{20E7B683-23D0-4B9C-BE15-3CC6D0F4C493}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RockPaperScissorsApp.Logic", "RockPaperScissorsApp.Logic\RockPaperScissorsApp.Logic.csproj", "{20E7B683-23D0-4B9C-BE15-3CC6D0F4C493}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RockPaperScissorsApp.DataInfrastructure", "RockPaperScissorsApp.DataInfrastructure\RockPaperScissorsApp.DataInfrastructure.csproj", "{128D5F27-5970-4EA0-80C2-C27EB5218052}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{20E7B683-23D0-4B9C-BE15-3CC6D0F4C493}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20E7B683-23D0-4B9C-BE15-3CC6D0F4C493}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20E7B683-23D0-4B9C-BE15-3CC6D0F4C493}.Release|Any CPU.Build.0 = Release|Any CPU
+		{128D5F27-5970-4EA0-80C2-C27EB5218052}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{128D5F27-5970-4EA0-80C2-C27EB5218052}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{128D5F27-5970-4EA0-80C2-C27EB5218052}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{128D5F27-5970-4EA0-80C2-C27EB5218052}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,5 @@
-﻿using System.Data.SqlClient;
+﻿using System.Data;
+using System.Data.SqlClient;
 
 // next steps...
 // we'd like to keep all the database-specific implementation details in their own classes
@@ -10,7 +11,8 @@
 
 string connectionString = File.ReadAllText("C:/revature/richard-book-db.txt");
 
-ListBooks();
+//ListBooks();
+ListBooksDisconnected();
 
 Console.WriteLine("Enter a book title: ");
 string title = Console.ReadLine()!;
@@ -25,9 +27,9 @@ void ListBooks()
     // 1. open the connection
     using SqlConnection connection = new(connectionString);
     connection.Open();
-    using SqlCommand command = new("SELECT * FROM Books;", connection);
+    using IDbCommand command = new SqlCommand("SELECT * FROM Books;", connection);
     // 2. execute the command
-    using SqlDataReader reader = command.ExecuteReader();
+    using IDataReader reader = command.ExecuteReader();
 
     // 3. process the results
     while (reader.Read())
@@ -39,9 +41,48 @@ void ListBooks()
     }
     // 4. close the connection
     connection.Close(); // good practice to close connection ASAP, and explicitly
+
+    // we can reopen that same connection and reuse it
+    // it's no big deal to not do that and just instantiate a new one though
+    //    because the SqlClient ADO.NET code maintains a "connection pool"
 }
 
-void AddNewBook(string title, int pages)
+void ListBooksDisconnected()
+{
+    // disconnected architecture (for queries) focuses on closing the connection ASAP,
+    //   by loading all the results into some general .NET objects (DataSet),
+    // then closing the connection, then processing the results.
+
+    // 1. open the connection
+    using SqlConnection connection = new(connectionString);
+    connection.Open();
+    string commandText = @"SELECT B.Title, B.Author, B.Pages, G.Genre, FP.PrintFormat, FP.Price
+        FROM Books AS B
+        INNER JOIN FormatPrice AS FP ON B.Title = FP.Title
+        INNER JOIN Genres AS G ON G.ID = B.GenreID;";
+    using SqlCommand command = new(commandText, connection);
+    // instead of directly managing the datareader, we have a dataadapter fill a dataset with the command
+    using SqlDataAdapter adapter = new(command);
+    DataSet dataSet = new();
+    // 2. execute the command
+    adapter.Fill(dataSet);
+    // 3. close the connection
+    connection.Close();
+    // 4. process the results
+
+    // inside the DataSet are DataTables (one per result set)
+    // inside the DataTable are DataColumns and DataRows
+    // DataSet was made before we had generics
+    // in C#, you can use a foreach loop on anything that implements IEnumerable<T> (and you'll get a T out)
+    // ...OR IEnumerable (and you get to implicitly downcast in the foreach loop)
+    DataColumn? titleColumn = dataSet.Tables[0].Columns[0];
+    foreach (DataRow row in dataSet.Tables[0].Rows)
+    {
+        Console.WriteLine($"{row["Author"]}: \"{row["Title"]}\" ({row["Pages"]} p.) [{row["Genre"]}]");
+    }
+}
+
+    void AddNewBook(string title, int pages)
 {
     using SqlConnection connection = new(connectionString);
     connection.Open();
