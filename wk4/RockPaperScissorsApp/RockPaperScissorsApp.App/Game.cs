@@ -57,7 +57,7 @@ namespace RockPaperScissorsApp.App
             Console.WriteLine($"You have a {record.Result}!");
         }
 
-        public void Summary()
+        public string Summary()
         {
             IEnumerable<Round> allRecords = _repository.GetAllRoundsOfPlayer(PlayerName);
             var summary = new StringBuilder();
@@ -69,7 +69,7 @@ namespace RockPaperScissorsApp.App
             }
             summary.AppendLine("---------------------------------------------------------------");
 
-            Console.WriteLine(summary.ToString());
+            return summary.ToString();
         }
     }
 }

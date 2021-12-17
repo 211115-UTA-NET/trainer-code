@@ -54,7 +54,7 @@ namespace RockPaperScissorsApp.App
                 game.PlayRound();
             }
             Console.WriteLine("--- Game Records ---");
-            game.Summary();
+            Console.WriteLine(game.Summary());
         }
     }
 }
