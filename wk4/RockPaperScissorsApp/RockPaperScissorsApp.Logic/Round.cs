@@ -13,14 +13,14 @@
         // they're there for some other code to notice them and make some change to their own behavior
 
         // ex: [ 10/7 Computer: Rock VS You: Paper => You Win! ]
-        public DateTime Date { get; }
+        public DateTimeOffset Date { get; }
 
         public Move Player1 { get; }
         public Move Player2 { get; }
         public RoundResult Result => EvaluateResult(Player1, Player2);
 
         // constructor
-        public Round(DateTime date, Move player1, Move player2)
+        public Round(DateTimeOffset date, Move player1, Move player2)
         {
             Date = date;
             Player1 = player1;

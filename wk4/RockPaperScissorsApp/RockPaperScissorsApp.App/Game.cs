@@ -1,54 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
+﻿using System.Text;
+using RockPaperScissorsApp.DataInfrastructure;
 using RockPaperScissorsApp.Logic;
-using Xml = RockPaperScissorsApp.App.Serialization;
 
 namespace RockPaperScissorsApp.App
 {
     public class Game
     {
-        private List<Round> allRecords = new List<Round>();
         public string PlayerName { get; }
         private readonly IMoveDecider cpuMoveDecider;
-
-        public XmlSerializer Serializer { get; } = new(typeof(List<Xml.Record>));
+        private readonly IRepository _repository;
 
         // constructor
-        public Game(string playerName, IMoveDecider cpuMoveDecider, List<Round>? allRecords = null)
+        public Game(string playerName, IMoveDecider cpuMoveDecider, IRepository repository)
         {
             PlayerName = playerName;
             this.cpuMoveDecider = cpuMoveDecider;
-            if (allRecords != null)
-            {
-                this.allRecords = allRecords;
-            }
+            _repository = repository;
         }
 
         public void PlayRound()
         {
-            Console.WriteLine("1. Rock\n2. Paper\n3. Scissor");
+            Console.WriteLine("1. Rock\n2. Paper\n3. Scissors");
             string? playerChoice = null;
-            int player=0;
-            while (playerChoice == null || playerChoice.Length <= 0 )
+            int player = 0;
+            while (playerChoice == null || playerChoice.Length <= 0)
             {
                 Console.Write("What's your choice? ");
                 playerChoice = Console.ReadLine();
                 bool validchoice = int.TryParse(playerChoice, out player);
-                if (!validchoice || (player > 3 && player < 0) )
+                if (!validchoice || (player > 3 && player < 0))
                 {
                     Console.WriteLine("Invalid Choice, Try Again!");
                     Console.WriteLine();
-                    playerChoice=null;
+                    playerChoice = null;
                     continue;
                 }
             }
 
-            //Random random = new Random();
-            //Move PCchoice = (Move)random.Next(3); // 0, 1 or 2
             Move pcChoice = cpuMoveDecider.DecideMove();
             Console.WriteLine();
             Move playerMove = (Move)(player - 1);
@@ -64,13 +52,14 @@ namespace RockPaperScissorsApp.App
         /// <param name="player">The move played by the player in that round</param>
         private void AddRecord(Move pc, Move player)
         {
-            var record = new Round(DateTime.Now, player, pc);
-            allRecords.Add(record);
+            var record = new Round(DateTimeOffset.Now, player, pc);
+            _repository.AddNewRound(PlayerName, null, record);
             Console.WriteLine($"You have a {record.Result}!");
         }
 
         public void Summary()
         {
+            IEnumerable<Round> allRecords = _repository.GetAllRoundsOfPlayer(PlayerName);
             var summary = new StringBuilder();
             summary.AppendLine($"Date\t\t\tComputer\t{PlayerName}\t\tResult");
             summary.AppendLine("---------------------------------------------------------------");
@@ -79,35 +68,8 @@ namespace RockPaperScissorsApp.App
                 summary.AppendLine($"{record.Date}\t{record.Player1}\t\t{record.Player2}\t\t{record.Result}");
             }
             summary.AppendLine("---------------------------------------------------------------");
-            
+
             Console.WriteLine(summary.ToString());
-        }
-
-        public string SerializeAsXml()
-        {
-            var xmlRecords = new List<Xml.Record>();
-
-            foreach (Round record in allRecords)
-            {
-                //var xml = new Xml.Record();
-                //xml.When = record.Date;
-                //xml.PlayerMove = record.Player;
-                //xml.CPUMove = record.PC;
-                //xml.Result = record.result;
-                // "property initializer" syntax - call a constructor & set properties in one go.
-                xmlRecords.Add(new Xml.Record
-                {
-                    When = record.Date,
-                    PlayerMove = record.Player1.ToString(),
-                    CPUMove = record.Player2.ToString(),
-                    Result = record.Result.ToString()
-                });
-            }
-
-            var stringWriter = new StringWriter();
-            Serializer.Serialize(stringWriter, xmlRecords);
-            stringWriter.Close();
-            return stringWriter.ToString();
         }
     }
 }

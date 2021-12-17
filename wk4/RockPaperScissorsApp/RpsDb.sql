@@ -1,8 +1,8 @@
-DROP TABLE Rps.Round;
-DROP TABLE Rps.Move;
-DROP TABLE Rps.Player;
-DROP SCHEMA Rps;
-GO
+--DROP TABLE Rps.Round;
+--DROP TABLE Rps.Move;
+--DROP TABLE Rps.Player;
+--DROP SCHEMA Rps;
+--GO
 
 CREATE SCHEMA Rps;
 GO
@@ -44,6 +44,35 @@ ALTER TABLE Rps.Round ADD CONSTRAINT FK_Round_Player1Move
     FOREIGN KEY (Player1Move) REFERENCES Rps.Move (Id);
 ALTER TABLE Rps.Round ADD CONSTRAINT FK_Round_Player2Move
     FOREIGN KEY (Player2Move) REFERENCES Rps.Move (Id);
+    
+CREATE NONCLUSTERED INDEX IX_Round_Player1
+    ON Rps.Round (Player1);
+CREATE NONCLUSTERED INDEX IX_Round_Player2
+    ON Rps.Round (Player2);
+CREATE NONCLUSTERED INDEX IX_Round_Player1Move
+    ON Rps.Round (Player1Move);
+CREATE NONCLUSTERED INDEX IX_Round_Player2Move
+    ON Rps.Round (Player2Move);
 
 INSERT INTO Rps.Move (Name) VALUES
     ('Rock'), ('Paper'), ('Scissors');
+
+INSERT INTO Rps.Player (Name) VALUES
+    ('Nick');
+
+INSERT INTO Rps.Round (Player1, Player2, Player1Move, Player2Move) VALUES
+    ((SELECT Id FROM Rps.Player WHERE Name = 'Nick'), NULL,
+        (SELECT Id FROM Rps.Move WHERE Name = 'Paper'), (SELECT Id FROM Rps.Move WHERE Name = 'Rock'));
+
+-- workspace
+
+SELECT Timestamp, P1.Name, P2.Name, P1M.Name, P2M.Name
+                  FROM Rps.Round
+                      INNER JOIN Rps.Player AS P1 ON Player1 = P1.Id
+                      LEFT JOIN Rps.Player AS P2 ON Player2 = P2.Id
+                      INNER JOIN Rps.Move AS P1M ON Player1Move = P1M.Id
+                      INNER JOIN Rps.Move AS P2M ON Player2Move = P2M.Id
+                  WHERE P1.Name = 'Nick';
+                  
+SELECT * FROM Rps.Round;
+SELECT * FROM Rps.Player;

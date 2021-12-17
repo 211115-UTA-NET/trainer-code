@@ -19,7 +19,7 @@ namespace RockPaperScissorsApp.DataInfrastructure
     public interface IRepository
     {
         IEnumerable<Round> GetAllRoundsOfPlayer(string name);
-        void AddNewRound(Round round);
+        void AddNewRound(string? player1, string? player2, Round round);
 
         //void Save();
     }
