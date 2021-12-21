@@ -31,14 +31,33 @@
 
         // let's define something actually useful in many situations - 
         // a method the help us transform or map a list to a new value for each element of that list
-        public static IEnumerable<T> Map<T>(this IEnumerable<T> list, Mapper<T> mapper)
+        //public static IEnumerable<T2> Map<T1, T2>(this IEnumerable<T1> list, Mapper<T1, T2> mapper)
+        public static IEnumerable<TOutput> Map<TInput, TOutput>(this IEnumerable<TInput> items, Func<TInput, TOutput> mapper)
         {
-            List<T> result = new();
-            foreach (T item in list)
+            List<TOutput> result = new();
+            //items.RunForEach(val => result.Add(mapper(val)));
+            foreach (TInput item in items)
             {
                 result.Add(mapper(item));
             }
             return result;
+            // equiv with LINQ:
+            //return items.Select(mapper);
+        }
+
+        // C# added a nice thing called LINQ, a BUNCH of general purpose extension methods on IEnumerable like that ^
+        // in LINQ, my Map function is just called Select.
+        // the LINQ namespace is System.Linq
+
+        // not really needed if it's a List, because List literally already has this
+        // method (called ForEach)
+        // not very useful with the old anonymous delegate syntax because it's no less verbose
+        public static void RunForEach<T>(this IEnumerable<T> list, Action<T> code)
+        {
+            foreach (T item in list)
+            {
+                code(item);
+            }
         }
     }
 }
