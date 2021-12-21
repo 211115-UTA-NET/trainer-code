@@ -47,6 +47,13 @@ foreach (TypeInfo theClass in classes)
         .Where(m => m.GetCustomAttributes().Any(a => a.GetType() == typeof(UnitTestAttribute))));
 }
 
+if (randomOrder)
+{
+    //Console.WriteLine("order is randomized");
+    Random random = new();
+    tests = tests.OrderBy(a => random.Next()).ToList();
+}
+
 // execute the tests
 foreach (MethodInfo testMethod in tests)
 {
@@ -73,13 +80,6 @@ foreach (MethodInfo testMethod in tests)
         failedTests++;
     }
     totalTests++;
-}
-
-if (randomOrder)
-{
-    //Console.WriteLine("order is randomized");
-    Random random = new();
-    tests = tests.OrderBy(a => random.Next()).ToList();
 }
 
 Console.WriteLine($"Tests passed: {passedTests}/{totalTests}");
