@@ -57,9 +57,9 @@ namespace RockPaperScissorsApp.App
             Console.WriteLine($"You have a {record.Result}!");
         }
 
-        public string Summary()
+        public async Task<string> SummaryAsync()
         {
-            IEnumerable<Round> allRecords = _repository.GetAllRoundsOfPlayer(PlayerName);
+            IEnumerable<Round> allRecords = await _repository.GetAllRoundsOfPlayerAsync(PlayerName);
             var summary = new StringBuilder();
             summary.AppendLine($"Date\t\t\tComputer\t{PlayerName}\t\tResult");
             summary.AppendLine("---------------------------------------------------------------");

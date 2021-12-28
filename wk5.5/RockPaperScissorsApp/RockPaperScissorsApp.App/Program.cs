@@ -25,7 +25,7 @@ namespace RockPaperScissorsApp.App
     public class Program
     {
 
-        public static void Main(string[] args)
+        public async static Task Main(string[] args)
         {
             Console.WriteLine("Welcome to RockPaperScissors App");
             string? name = null;
@@ -35,7 +35,7 @@ namespace RockPaperScissorsApp.App
                 name = Console.ReadLine();
             }
 
-            string connectionString = File.ReadAllText("C:/revature/richard-rps-db.txt");
+            string connectionString = await File.ReadAllTextAsync("C:/revature/richard-rps-db.txt");
             IRepository repository = new SqlRepository(connectionString);
 
             RandomMoveDecider moveDecider = new RandomMoveDecider();
@@ -54,7 +54,10 @@ namespace RockPaperScissorsApp.App
                 game.PlayRound();
             }
             Console.WriteLine("--- Game Records ---");
-            Console.WriteLine(game.Summary());
+            // synchronously wait on the Task (can't do anything else in the meantime)
+            // bad! unless it's the Main method, where clearly there's no "other code" that could be running
+            //Console.WriteLine(game.SummaryAsync().Result);
+            Console.WriteLine(await game.SummaryAsync());
         }
     }
 }

@@ -18,7 +18,7 @@ namespace RockPaperScissorsApp.DataInfrastructure
     // but P0 requires using basic ADO.NET (sqlconnection, sqlcommand, sqldatareader/sqldataadapter etc)
     public interface IRepository
     {
-        IEnumerable<Round> GetAllRoundsOfPlayer(string name);
+        Task<IEnumerable<Round>> GetAllRoundsOfPlayerAsync(string name);
         void AddNewRound(string? player1, string? player2, Round round);
 
         //void Save();
