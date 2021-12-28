@@ -1,11 +1,16 @@
-﻿using System.Net;
-using System.Net.Mime;
-using System.Text;
-using System.Xml.Serialization;
-using AspNetCoreIntro;
+﻿using AspNetCoreIntro.Middleware;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+// before we "build" the WebApplication,
+// we "set up" things that the middleware/etc will need when they run
+builder.Services.AddControllers();
+
 WebApplication app = builder.Build();
+
+// by default (customizable), for security reasons, this builtin middleware
+// only serves files inside a folder named wwwroot inside the project
+app.UseStaticFiles();
 
 // exercise option 1:
 //    make an asp.net core app (start with the empty template) that
@@ -41,54 +46,64 @@ WebApplication app = builder.Build();
 //    return Task.CompletedTask;
 //});
 
-XmlSerializer serializer = new(typeof(List<Data>));
-List<Data> theData = new()
-{
-   new Data { Number = 3, More = new() },
-   new Data { Number = 2, More = new() },
-   new Data { Number = 5 }
-};
+//app.UseMiddleware<RequireAuthMiddleware>();
+// replaced by ^
+//app.Use(async (context, next) =>
+//{
+//    if (context.Request.Query["authenticated"] == "true")
+//    {
+//        // "this middleware is done, let the next one in the pipeline take over"
+//        await next(context);
+//    }
+//    else
+//    {
+//        // if we don't invoke "next", this middleware is "short-circuiting" the pipeline -
+//        // it better finish setting up the response.
 
-app.Use(async (context, next) =>
-{
-    if (context.Request.Query["authenticated"] == "true")
-    {
-        // "this middleware is done, let the next one in the pipeline take over"
-        await next(context);
-    }
-    else
-    {
-        // if we don't invoke "next", this middleware is "short-circuiting" the pipeline -
-        // it better finish setting up the response.
-
-        context.Response.StatusCode = 401;
-        context.Response.ContentType = "text/plain";
-        //await context.Response.Body.WriteAsync(Encoding.UTF8.GetBytes("error, not authenticated"));
-        await context.Response.WriteAsync("error, not authenticated");
-        //context.Response.Body
-    }
-});
+//        context.Response.StatusCode = 401;
+//        context.Response.ContentType = "text/plain";
+//        //await context.Response.Body.WriteAsync(Encoding.UTF8.GetBytes("error, not authenticated"));
+//        await context.Response.WriteAsync("error, not authenticated");
+//        //context.Response.Body
+//    }
+//});
 
 // accessing shared data from multiple threads (runs of the request-processing pipeline)
 // has a big concern called CONCURRENCY, some classes are not designed to handle it.
 //   check the documentation for classes if they are "threadsafe" to see if it's ok or not
 // if it's not, try something else, or use locks (something C# can do)
-app.Use(async (context, next) =>
-{
-    if (context.Request.Path.StartsWithSegments("/data"))
-    {
-        context.Response.StatusCode = StatusCodes.Status200OK; // same as = 200, more verbose
-        context.Response.ContentType = MediaTypeNames.Text.Xml; // same as = "text/xml", stops you from a typo
+app.UseMiddleware<DataSerializeMiddleware>();
+// replaced by ^
+//app.Use(async (context, next) =>
+//{
+//    if (context.Request.Path.StartsWithSegments("/data"))
+//    {
+//        context.Response.StatusCode = StatusCodes.Status200OK; // same as = 200, more verbose
+//        context.Response.ContentType = MediaTypeNames.Text.Xml; // same as = "text/xml", stops you from a typo
 
-        // xmlserializer is not great and does not support async directly...
-        // if it was important, i would need to refactor this code
-        serializer.Serialize(stream: context.Response.Body, o: theData);
-    }
-    else
-    {
-        // not my job, next middleware handle this one
-        await next(context);
-    }
+//        // xmlserializer is not great and does not support async directly...
+//        // if it was important, i would need to refactor this code
+//        serializer.Serialize(stream: context.Response.Body, o: theData);
+//    }
+//    else
+//    {
+//        // not my job, next middleware handle this one
+//        await next(context);
+//    }
+//});
+
+
+// these middlewares together activate a BUNCH of nice builtin behavior
+// in concert with things called Controllers
+//   which you will make (at least from a REST point of view) to handle specific resources
+// nice things like: automatic serialization to the response (using "ActionResults")
+//                   automatic deserialization from the request (model binding)
+//                   convenient pattern-based routing based on the url path
+//                   dependency injection (to be seen later)
+app.UseRouting();
+app.UseEndpoints(routeBuilder =>
+{
+    routeBuilder.MapControllers();
 });
 
 // broken?
