@@ -1,0 +1,10 @@
+/api/players: possible players of games/rounds
+    GET - list players
+    POST - add new player
+/api/players/{id}: a player
+    GET - the player
+    (PUT - update player details)?
+/api/rounds
+    POST - add new round (win/lose/tie in response)
+/api/rounds?player={id}: the rounds of some player
+    GET - list rounds, including win/loss, maybe stats
