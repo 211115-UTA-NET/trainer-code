@@ -1,8 +1,10 @@
-﻿using System.Text;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
+﻿using System.Net;
+using System.Net.Mime;
+using System.Text;
+using System.Xml.Serialization;
+using AspNetCoreIntro;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
-builder.Services.Configure<KestrelServerOptions>(options => options.AllowSynchronousIO = true);
 WebApplication app = builder.Build();
 
 // exercise option 1:
@@ -27,12 +29,32 @@ WebApplication app = builder.Build();
 // this call adds a middleware to the pipeline.
 // each middleware runs in sequence.
 // "Use" middleware could be anywhere in the pipeline
-app.Use((context, next) =>
+
+// asp.net code should be async so that the app can handle multiple requests at a time more efficiently
+//app.Use((context, next) =>
+//{
+//    // synchronously wait; simulate some long-running operation
+//    // while not being async
+//    Task.Delay(3000).Wait();
+//    next(context).Wait();
+
+//    return Task.CompletedTask;
+//});
+
+XmlSerializer serializer = new(typeof(List<Data>));
+List<Data> theData = new()
+{
+   new Data { Number = 3, More = new() },
+   new Data { Number = 2, More = new() },
+   new Data { Number = 5 }
+};
+
+app.Use(async (context, next) =>
 {
     if (context.Request.Query["authenticated"] == "true")
     {
         // "this middleware is done, let the next one in the pipeline take over"
-        next(context);
+        await next(context);
     }
     else
     {
@@ -41,28 +63,48 @@ app.Use((context, next) =>
 
         context.Response.StatusCode = 401;
         context.Response.ContentType = "text/plain";
-        context.Response.Body.Write(Encoding.UTF8.GetBytes("error, not authenticated"));
+        //await context.Response.Body.WriteAsync(Encoding.UTF8.GetBytes("error, not authenticated"));
+        await context.Response.WriteAsync("error, not authenticated");
         //context.Response.Body
     }
+});
 
-    return Task.CompletedTask;
+// accessing shared data from multiple threads (runs of the request-processing pipeline)
+// has a big concern called CONCURRENCY, some classes are not designed to handle it.
+//   check the documentation for classes if they are "threadsafe" to see if it's ok or not
+// if it's not, try something else, or use locks (something C# can do)
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path.StartsWithSegments("/data"))
+    {
+        context.Response.StatusCode = StatusCodes.Status200OK; // same as = 200, more verbose
+        context.Response.ContentType = MediaTypeNames.Text.Xml; // same as = "text/xml", stops you from a typo
+
+        // xmlserializer is not great and does not support async directly...
+        // if it was important, i would need to refactor this code
+        serializer.Serialize(stream: context.Response.Body, o: theData);
+    }
+    else
+    {
+        // not my job, next middleware handle this one
+        await next(context);
+    }
 });
 
 // broken?
-app.Map("/map1", context =>
+app.Map("/map1", async context =>
 {
-    context.Response.Body.Write(Encoding.UTF8.GetBytes("Hello from map1"));
-    return Task.CompletedTask;
+    //await context.Response.Body.WriteAsync(Encoding.UTF8.GetBytes("Hello from map1"));
+    await context.Response.WriteAsync("Hello from map1");
 });
 
-app.Map("/map2", context =>
+app.Map("/map2", async context =>
 {
-    context.Response.Body.Write(Encoding.UTF8.GetBytes("Hello from map2"));
-    return Task.CompletedTask;
+    await context.Response.WriteAsync("Hello from map2");
 });
 
 // "Run" middleware is at the end of the pipeline (no "next")
-app.Run(context =>
+app.Run(async context =>
 {
     // the HttpContext parameter (context) gives access to all the request data
     // and lets you modify all the response data.
@@ -74,13 +116,13 @@ app.Run(context =>
     context.Response.ContentType = "text/plain";
     // serializing the string as bytes using UTF8 encoding, and writing it to the
     // HTTP response directly
-    context.Response.Body.Write(Encoding.UTF8.GetBytes($"path was: {path}, data was {dataValue}"));
+    await context.Response.WriteAsync($"path was: {path}, data was {dataValue}");
 
     // need this line so it compiles
-    // (really this delegate should be async but we haven't done that yet)
-    return Task.CompletedTask;
+    // (really this delegate should've been async but we hadn't done that yet) (it's now async)
+    //return Task.CompletedTask;
 });
 
 
 // this call runs the app
-app.Run();
+await app.RunAsync();
