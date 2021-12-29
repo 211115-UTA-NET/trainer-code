@@ -103,4 +103,5 @@ namespace RpsConsoleApp.UI
             var result = await response.Content.ReadFromJsonAsync<string>();
             return result!;
         }
+    }
 }
