@@ -127,5 +127,25 @@ namespace RpsApi.DataStorage
             reader2.Read();
             return reader2.GetInt32(0);
         }
+
+        public async Task<bool> PlayerExistsAsync(string player)
+        {
+            using SqlConnection connection = new(_connectionString);
+            connection.Open();
+
+            // returns 1 if exists, nothing if not
+            string cmdText = @"SELECT 1
+                               FROM Rps.Player
+                               WHERE Name = @playername";
+            using (SqlCommand cmd = new(cmdText, connection))
+            {
+                cmd.Parameters.AddWithValue("@playername", player);
+
+                using SqlDataReader reader = cmd.ExecuteReader();
+
+                // true if at least one row
+                return await reader.ReadAsync();
+            }
+        }
     }
 }

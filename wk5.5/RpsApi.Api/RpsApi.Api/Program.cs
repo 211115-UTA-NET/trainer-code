@@ -20,6 +20,8 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    // Swagger document aka OpenAPI document
+
     app.UseSwagger();
     app.UseSwaggerUI();
 }
