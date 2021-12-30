@@ -1,4 +1,5 @@
-﻿using RpsApi.DataStorage;
+﻿using Microsoft.AspNetCore.Mvc.Formatters;
+using RpsApi.DataStorage;
 
 string connectionString = await File.ReadAllTextAsync("C:/revature/richard-rps-db.txt");
 IRepository repository = new SqlRepository(connectionString);
@@ -7,7 +8,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options =>
+{
+    // custom formatters configured here to enable any/all action methods to either
+    // get new/different/non-json formats in model binding and/or their results
+    //  to get serialized in new/different/non-json formats
+    options.InputFormatters.Add(new XmlSerializerInputFormatter(options));
+    options.OutputFormatters.Add(new XmlSerializerOutputFormatter());
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

@@ -27,6 +27,11 @@
             Player2 = player2;
         }
 
+        // for serializer
+        public Round()
+        {
+        }
+
         // assigns the CPU move to player 1
 
         // result from perspective of player 1
