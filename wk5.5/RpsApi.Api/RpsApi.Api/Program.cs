@@ -6,8 +6,10 @@ IRepository repository = new SqlRepository(connectionString);
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// key would be "Logging:LogLevel:Default" for that setting, ":" is the heirarchical nesting
+bool prettyPrintJson = builder.Configuration.GetValue<string>("PrettyPrintJsonOutput") == "true";
 
+// Add services to the container.
 builder.Services.AddControllers(options =>
 {
     // custom formatters configured here to enable any/all action methods to either
@@ -15,6 +17,9 @@ builder.Services.AddControllers(options =>
     //  to get serialized in new/different/non-json formats
     options.InputFormatters.Add(new XmlSerializerInputFormatter(options));
     options.OutputFormatters.Add(new XmlSerializerOutputFormatter());
+
+    var jsonFormatter = options.OutputFormatters.OfType<SystemTextJsonOutputFormatter>().First();
+    jsonFormatter.SerializerOptions.WriteIndented = prettyPrintJson;
 });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

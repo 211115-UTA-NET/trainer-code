@@ -70,4 +70,5 @@ Nov 15 2021 Arlington .NET / Richard Hawkins, Nick Escalona
 
 ### tests
 * at least 10 test methods
+* at least 1 test should use Moq
 * no tests should connect to the app's actual database
