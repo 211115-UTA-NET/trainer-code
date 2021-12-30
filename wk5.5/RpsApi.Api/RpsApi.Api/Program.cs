@@ -2,7 +2,6 @@
 using RpsApi.DataStorage;
 
 string connectionString = await File.ReadAllTextAsync("C:/revature/richard-rps-db.txt");
-IRepository repository = new SqlRepository(connectionString);
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,8 +24,9 @@ builder.Services.AddControllers(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 // provide any other dependencies that, e.g., the controllers need injected into them
-// "if anyone asks for an IRepository, give them this object"
-builder.Services.AddSingleton<IRepository>(repository);
+// "if anyone asks for an IRepository, run this lambda expression"
+// (uses a service provider parameter to grab another dependency it needs, from the same DI container)
+builder.Services.AddSingleton<IRepository>(sp => new SqlRepository(connectionString, sp.GetRequiredService<ILogger<SqlRepository>>()));
 
 var app = builder.Build();
 

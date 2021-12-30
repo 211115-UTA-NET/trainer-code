@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Logging;
 using RpsApi.Logic;
 
 namespace RpsApi.DataStorage
@@ -6,10 +7,12 @@ namespace RpsApi.DataStorage
     public class SqlRepository : IRepository
     {
         private readonly string _connectionString;
+        private readonly ILogger<SqlRepository> _logger;
 
-        public SqlRepository(string connectionString)
+        public SqlRepository(string connectionString, ILogger<SqlRepository> logger)
         {
             _connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
+            _logger = logger;
         }
 
         // changing sync code to async:
@@ -57,6 +60,8 @@ namespace RpsApi.DataStorage
             }
 
             await connection.CloseAsync();
+
+            _logger.LogInformation("executed select statement for rounds of player {player}", name);
 
             return result;
         }
