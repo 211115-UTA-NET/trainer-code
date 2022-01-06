@@ -39,7 +39,7 @@ jobs:
       
       - name: print working directory
         uses: pkg-src/github-action-git-bash@v1.1
-          args = ['bash', 'pwd']
+          args = ['pwd']
         
 
       - name: Set up .NET Core
