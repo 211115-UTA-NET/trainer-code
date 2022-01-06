@@ -36,6 +36,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      
+      - name: print working directory
+        uses: pkg-src/github-action-git-bash@v1.1
+        args : ['bash', 'pwd']
+        
 
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
