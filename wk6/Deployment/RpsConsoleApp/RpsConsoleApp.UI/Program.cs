@@ -43,7 +43,8 @@ namespace RockPaperScissorsApp.App
             // and not buried somewhere not obvious, or worse,
             // duplicated in several places.
             // better approach would be, read it from command line args, environment variables, or maybe a file
-            Uri server = new("https://localhost:7175");
+            // Uri server = new("https://localhost:7175");
+            Uri server = new("https://211115rpstest.azurewebsites.net");
 
             IGameService gameService = new GameService(server);
 

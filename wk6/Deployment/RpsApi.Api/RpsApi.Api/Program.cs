@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc.Formatters;
 using RpsApi.DataStorage;
 
-string connectionString = await File.ReadAllTextAsync("C:/revature/DEMO_RPS_CS.txt");
+//string connectionString = await File.ReadAllTextAsync("C:/revature/DEMO_RPS_CS.txt");
 
 var builder = WebApplication.CreateBuilder(args);
+
+string connectionString = builder.Configuration.GetConnectionString("RPS-DB-Connection");
 
 // key would be "Logging:LogLevel:Default" for that setting, ":" is the heirarchical nesting
 bool prettyPrintJson = builder.Configuration.GetValue<string>("PrettyPrintJsonOutput") == "true";
