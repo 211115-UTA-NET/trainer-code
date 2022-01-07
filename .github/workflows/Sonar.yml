@@ -36,13 +36,11 @@ jobs:
           restore-keys: ${{ runner.os }}-sonar-scanner
       
       - name: Install SonarCloud scanner
-        env:
-          DOTNET_ROLL_FORWARD: Major
         if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'          
         shell: powershell
         run: |
           New-Item -Path .\.sonar\scanner -ItemType Directory
-          dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner 
+          dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner --version 5.4.0
       
       - name: Build and analyze
         env:
