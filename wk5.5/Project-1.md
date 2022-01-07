@@ -72,3 +72,9 @@ Nov 15 2021 Arlington .NET / Richard Hawkins, Nick Escalona
 * at least 10 test methods
 * at least 1 test should use Moq
 * no tests should connect to the app's actual database
+
+### CI/CD
+* your console app should include a CI pipeline to analyze with SonarCloud and perform any unit tests you have written
+* your console app should include a CD pipeline to build, publish, and create a Docker image of your app, and push it to your DockerHub repo
+* your API should include a CI pipeline to analyze with SonarCloud and perform any unit tests you have written
+* your API should include a CD pipeline to build, publish, and deploy your app to Azure App Service for deployment
