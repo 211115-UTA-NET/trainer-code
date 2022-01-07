@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Formatters;
 using RpsApi.DataStorage;
 
-string connectionString = await File.ReadAllTextAsync("C:/revature/richard-rps-db.txt");
+string connectionString = await File.ReadAllTextAsync("C:/revature/DEMO_RPS_CS.txt");
 
 var builder = WebApplication.CreateBuilder(args);
 
