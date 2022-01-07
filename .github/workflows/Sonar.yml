@@ -49,5 +49,5 @@ jobs:
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"211115-UTA-NET_trainer-code" /o:"211115-uta-net" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          dotnet clean build -c Release ./wk6/Deployment/RpsApi.Api/RpsApi.Api.sln
+          dotnet clean build -c Release ./wk6/Deployment/RpsApi.Api/RpsApi.Api/
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
