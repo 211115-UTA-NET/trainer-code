@@ -42,12 +42,23 @@ jobs:
           New-Item -Path .\.sonar\scanner -ItemType Directory
           dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
       
-      - name: Build and analyze
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        shell: powershell
-        run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"211115-UTA-NET_trainer-code" /o:"211115-uta-net" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          dotnet clean build -c Release ./wk6/Deployment/RpsApi.Api/RpsApi.Api/
-          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+#       - name: Build and analyze
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+#           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#         shell: powershell
+#         run: |
+#           .\.sonar\scanner\dotnet-sonarscanner begin /k:"211115-UTA-NET_trainer-code" /o:"211115-uta-net" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+#           dotnet clean build -c Release ./wk6/Deployment/RpsApi.Api/RpsApi.Api/
+#           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+          
+      - name: sonarscan-dotnet
+        # You may pin to the exact commit or the version.
+        # uses: highbyte/sonarscan-dotnet@150e3056f1ce7b77c84e7661124f39a3ea1ac6cd
+        uses: highbyte/sonarscan-dotnet@v2.1.2
+        with:
+          # The key of the SonarQube project
+          sonarProjectKey: ${{ secrets.SONAR_TOKEN }}
+          # The name of the SonarQube project
+          sonarProjectName: Trainer-Code
+
