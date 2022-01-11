@@ -1,0 +1,84 @@
+<!-- @author Andrew Crenwelge -->
+<!--
+This is an HTML document.
+HTML stands for Hypertext Markup Language - it defines the structure of a webpage.
+Browsers parse the HTML tags and render their content.
+Try opening this file with a web browser.
+-->
+
+<!-- By the way, this is how you make comments in HTML. The text in here won't be rendered -->
+
+<!--
+HTML uses "tags" to define the structure of the page.
+The first tag is the "doctype" tag - it tells the browser which version of HTML we are using.
+This says we're using HTML5. It's a lot cleaner/shorter than previous version doctypes -->
+<!DOCTYPE html>
+<!--
+The next tag is the <html> tag
+A tag uses < and > symbols to define an "element".
+Tags are either self-closing or have a matching closing tag (</>) - in this case we have a closing tag
+-->
+<html> <!-- Inside the html tag we put the "head" and "body" tags -->
+  <head> <!-- The head tag defines the metadata for the webpage -->
+    <title>HTML - HelloWorld</title>
+    <!-- Whatever is put in the <title> tag will typically display on the browser tab -->
+  </head> <!-- never forget to close your tags! -->
+  <body> <!-- The body defines the content of the webpage  -->
+    Hello World! now we get to the content of the webpage. This text will actually render
+    on the screen when you open up a browser.
+    <br> <!-- the <br /> tag specifies a line break -->
+    <br>
+    <div>
+      We can use tags like <code>&lt;div&gt;</code> within the <code>body</code>.
+      A "div" specifies a division of the page, logically separating the content.
+      There are two main types of tags - inline and block-level.
+      divs are block level - they will start a new "block" on the next line.
+      Remember, tags themselves don't get rendered but their content does.
+      <!--
+      Note that within the text, we need to escape characters (the "&lt;" for "<") that are markup-sensitive,
+      otherwise it would be treated like a tag in HTML!
+      -->
+    </div>
+    <div>
+      <p>
+        When writing HTML markup and we want to use a reserved character like the
+        less than sign (<code>&lt;</code>), we have to escape it - otherwise the
+        browser will interpret it as the start of a tag! Here's a list of some character
+        <a target="_blank" href="https://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references">
+          escape sequences
+        </a>.
+      </p>
+    </div>
+    <p>
+      The <code>&lt;p&gt;</code> tag is another very common tag - it represents paragraphs.
+      <br>
+      The <code>&lt;span&gt;</code> tag is an inline tag - it will render text inline with the text around it.
+      <!-- we've actually been using another inline tag already - the <code> tag! -->
+      <br>
+      If we want to make text <strong>bold</strong>, we use the <code>&lt;b&gt;</code> tag or the <code>&lt;strong&gt;</code> tag.
+      <br>
+      To <em>italicize</em>, use the <code>&lt;i&gt;</code> or <code>&lt;em&gt;</code> tag.
+    </p>
+    <p>
+      We can also <strong>nest tags</strong> within other tags, as we've been doing on this
+      page so far. For example, <code>head</code> and <code>body</code> are always
+      nested within the <code>html</code> tag. Indentation helps to make the nesting clear.
+    </p>
+    <p>
+      Now, how do we get to other webpages? <a target="_blank" href="https://en.wikipedia.org/wiki/Hyperlink">Hyperlinks</a>!
+      We use the <code>&lt;a&gt;</code> or "anchor" tag to create hyperlinks to other resources / webpages.
+      The anchor tag has an <code>href</code> <em>attribute</em>. An attribute is a property of a tag that consists of
+      <strong>a key/value pair</strong>. It goes inside the tag itself. In the case of the above anchor "href" attribute,
+      "href" is the key, and the URL "https://en.wikipedia.org/wiki/Hyperlink" is the value.
+      The key and value are separated by an equals sign.
+    </p>
+    <p>
+      Another (optional) attribute of the anchor tag is "target", which can have the values:
+      <code>_blank</code>, <code>_parent</code>, <code>_self</code>, or <code>_top</code>.
+      If you specify <code>_blank</code>, the specified URL is open in a new window/tab.
+    </p>
+    <p>
+      So...... using what we just learned, <a href="./advancedHTML.html">let's go to the next page</a>!
+    </p>
+  </body>
+</html>

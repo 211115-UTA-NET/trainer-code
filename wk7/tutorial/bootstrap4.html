@@ -1,0 +1,157 @@
+<!-- @author Andrew Crenwelge -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+    <title>Intro to Bootstrap</title>
+  </head>
+  <body>
+	<div class="jumbotron">
+		<h1>Hello, World!</h1>
+		<p class="lead">Welcome to Bootstrap</p>
+	</div>
+	<div class="container">
+    <div class="row">
+      <p>
+        Styling all your pages with your own CSS seems like a lot of work, especially
+        when you have to think about responsive design and all the different styles
+        you'd have to write just to get something to look nice. Isn't there an
+        easier way?
+      </p>
+      <p>
+        Yes! It's called <strong><a href="http://www.getbootstrap.com">Bootstrap</a></strong>!
+        Bootstrap is a <strong>responsive, mobile-first CSS framework</strong> - it is a bunch of
+        pre-written CSS styles (and optional JavaScript) that you can use. No more developing your own CSS
+        from scratch - just use the styling that Bootstrap provides you by default,
+				mainly by including classes on your HTML elements.
+      </p>
+			<p>
+				So, how to get started with Bootstrap? There's two main ways:
+			</p>
+			<ol>
+				<li>Use their CDN (content delivery network) - just include a <code>link</code> tag with the right URL (that's what this page does)</li>
+				<li>Download Bootstrap yourself and link to it locally</li>
+			</ol>
+			<p>
+				Note that using Bootstrap is not mutually exclusive with defining your own CSS -
+				you can add your own stylesheet as well to customize, or even modify the
+				Bootstrap source code since it is open-sourced.
+			</p>
+			<p>
+				Bootstrap is a large framework with many ready-to-go components and we won't
+				go through all of them, but the most critical aspects of Bootstrap are:
+			</p>
+			<ul>
+				<li>The grid system - within a container, you can create rows, each of which can have 12 columns</li>
+				<li>Responsive by default - use different classes to collapse columns on smaller devices</li>
+				<li>Components - headings, lists, tables, forms, dropdown menus, modals and many others are nicely styled using Bootstrap classes</li>
+				<li>Utility classes - use various utility classes to style elements how you want them</li>
+				<li>Consistency - every element will look and feel unified in its design</li>
+			</ul>
+			<p>
+				A demo of the Bootstrap grid system is shown below.
+			</p>
+    </div>
+	  <div class="row">
+		  <div class="col-lg-6">
+			<h1>Hello, world!</h1>
+		  </div>
+		  <div class="col-lg-6">
+			<h1>Hello, world!</h1>
+		  </div>
+	  </div>
+	  <div class="row">
+		  <div class="col-lg-4">
+			<h1>Hello, world!</h1>
+		  </div>
+		  <div class="col-lg-4">
+			<h1>Hello, world!</h1>
+		  </div>
+		  <div class="col-lg-4">
+			<h1>Hello, world!</h1>
+		  </div>
+	  </div>
+	  <div class="row">
+		  <div class="col-lg-3">
+			<h1>Hello, world!</h1>
+		  </div>
+		  <div class="col-lg-3">
+			<h1>Hello, world!</h1>
+		  </div>
+		  <div class="col-lg-3">
+			<h1>Hello, world!</h1>
+		  </div>
+		  <div class="col-lg-3">
+			<h1>Hello, world!</h1>
+		  </div>
+	  </div>
+	  <div class="row">
+		  <div class="col-md-3">
+			<h1>Med Col</h1>
+		  </div>
+		  <div class="col-md-3">
+			<h1>Med Col</h1>
+		  </div>
+		  <div class="col-md-3">
+			<h1>Med Col</h1>
+		  </div>
+		  <div class="col-md-3">
+			<h1>Med Col</h1>
+		  </div>
+	  </div>
+
+		<div>
+			<p>
+				And here's a sample Bootstrap table (tip: hover over the rows):
+			</p>
+		</div>
+
+	  <div class="row">
+	    <div class="col-lg-6">
+		  <table class="table table-bordered table-striped table-hover">
+			  <thead>
+				<tr>
+				  <th>Heading 1</th>
+				  <th>Heading 2</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				<tr>
+				  <td>Data 1</td>
+				  <td>Data 2</td>
+				</tr>
+				<tr>
+				  <td>Data 1</td>
+				  <td>Data 2</td>
+				</tr>
+				<tr>
+				  <td>Data 1</td>
+				  <td>Data 2</td>
+				</tr>
+			  </tbody>
+			  <caption>Caption here</caption>
+		  </table>
+			<p>
+				And here is a simple input field with a button:
+			</p>
+		  <form>
+			<input type="text" />
+			<button class="btn btn-primary">Click me</button>
+		  </form>
+		</div>
+	 </div>
+	</div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  </body>
+</html>

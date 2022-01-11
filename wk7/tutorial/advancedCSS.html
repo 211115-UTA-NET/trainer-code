@@ -1,0 +1,318 @@
+<!-- @author Andrew Crenwelge -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"> <!-- This meta tag defines the character encoding for the page -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- here is our reference to the CSS file -->
+    <link rel="stylesheet" href="./external.css">
+    <title>Advanced CSS</title>
+  </head>
+  <body>
+    <h2>External Stylesheets</h2>
+    <div>
+      <p>
+        Now that we've discussed inline and internal stylesheet styling, let's talk
+        about the most commonly used and best practice for styling - external stylesheets.
+        Instead of specifying the styling for a page in the <code>head</code>, we
+        can place our CSS in a separate <code>.css</code> file and reference it
+        using the <code>link</code> tag. We use the <code>href</code> attribute
+        to give the URL of the file, and the <code>rel</code> attribute specifies
+        the relationship to the HTML document - for CSS, we use <code>stylesheet</code>.
+        Here's a sample link tag from the <code>head</code> of this page:
+      </p>
+      <pre>
+        <code>&lt;link rel="stylesheet" href="./external.css"&gt;</code>
+      </pre>
+      <p>
+        And <a href="./external.css">here's a link</a> to the actual file.
+      </p>
+      <p>
+        There's several advantages to using external stylesheets to style your page:
+      </p>
+      <ul>
+        <li>Separation of concerns - HTML and CSS are in separate documents, you don't have to mix them</li>
+        <li>Reusability - the same stylesheet can be used to style many HTML files</li>
+        <li>Central location - if you need to change styling, you can do so in one place instead of many</li>
+        <li>Readability - your HTML will be less cluttered, and CSS styling easier to understand when they are separate</li>
+      </ul>
+    </div>
+
+    <h2>Cascading Rules</h2>
+    <div>
+      <p>
+        What happens when you have two CSS rules that conflict with each other
+        in the context of the HTML document - for example, consider the following CSS:
+      </p>
+      <pre>
+        <code>div { color: red; }
+        .green { color: green; }</code>
+      </pre>
+      <p>
+        What happens when you have the following HTML?
+      </p>
+      <pre>
+        <code>&lt;div class="green"&gt;hmmm...&lt;/div&gt;</code>
+      </pre>
+      <p>
+        It turns out the text will be green! (Try it out and see)
+      </p>
+      <p>
+        But how does the browser determine which CSS rules win out? The order that
+        selectors are chosen for styling depending on a few things, listed below
+        in order:
+      </p>
+      <ol>
+        <li>Importance</li>
+        <li>Specificity</li>
+        <li>Source order</li>
+      </ol>
+
+      <h3>Importance</h3>
+      <div>
+        <p>
+          There is a special CSS flag you can use to ensure that a style <strong>always</strong>
+          gets applied - the <code>!important</code> flag. For example:
+        </p>
+        <pre>
+          <code>div { color: red !important; } /* this style will always be applied */</code>
+        </pre>
+        <p>
+          The only way to override an <code>!important</code> flag is to apply another
+          <code>!important</code> flag on a selector with the same specificity later
+          in the document, or on a selector with greater specificity.
+        </p>
+      </div>
+
+      <h3>Specificity</h3>
+      <div>
+        <p>
+          <strong>Specificity</strong> is a measure of how <em>specific</em> a
+          selector is - basically, how many elements this selector could match.
+          The selector with the most specificity is favored and its styles will be
+          applied over other selectors. Each kind of selector is listed below in
+          order of most to least specific:
+        </p>
+        <ol>
+          <li>No selector / inline (declared inside <code>style</code> attribute)</li>
+          <li>ID selector</li>
+          <li>Class / attribute / pseudo-class selector</li>
+          <li>Element or pseudo-element selector</li>
+        </ol>
+        <p>
+          Thus, if we have the following CSS styles, we can determine which will
+          win out over the others:
+        </p>
+        <pre>
+          <code>div { color: red; } /* least specific - won't be applied */
+          #yellow { color: yellow; } /* most specific - this style will be applied */
+          .green { color: green; } /* in the middle - won't be applied */</code>
+        </pre>
+      </div>
+
+      <h3>Source Order</h3>
+      <div>
+        <p>
+          If two selectors have the same importance level and specificity, then the
+          determining factor for which style will be applied is <strong>the order
+          in which the selectors were declared - later rules win over earlier ones</strong>.
+          For example:
+        </p>
+        <pre>
+          <code>div { color: blue; } /* This comes first, will lose */
+          div { color: red; } /* this selector comes after, so we'll get this style applied */</code>
+        </pre>
+        <p>
+          This is important to keep in mind in case you mix external stylesheets with
+          an internal one, or if you important multiple external stylesheets -
+          <strong>the order of importing matters if CSS rules conflict!</strong>
+        </p>
+      </div>
+
+      <div>
+        <p>
+          <em>It's important to note that the cascading rules are only applied
+          when CSS properties are in conflict!</em>
+        </p>
+      </div>
+    </div>
+
+    <h2>Inheritance</h2>
+    <div>
+      <p>
+        Another concept you should be aware of in CSS is <strong>inheritance</strong>
+        - the idea that certain property values of an element get passed down
+        to child elements nested within them.
+      </p>
+      <p>
+        For example, <code>font-family</code> and <code>color</code> are inherited.
+        This means you can set a <code>font-family</code> for the entire document
+        by setting the property on the <code>html</code> or <code>body</code>
+        element.
+      </p>
+      <p>
+        You can control inheritance with a few special values:
+      </p>
+      <ul>
+        <li><code>inherit</code> - get the property value from parent element</li>
+        <li><code>initial</code> - sets the value to whatever the browser's default is</li>
+      </ul>
+      <p>
+        You can also use the
+        <code><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/all">all</a></code>
+        keyword to set all of an element's properties at once.
+      </p>
+    </div>
+
+    <h2>Layout with CSS</h2>
+    <div>
+      <p>
+        The <code><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/display">display</a></code>
+        property is a crucial CSS property you should be aware of - it defines
+        the <em>display type</em> of an element - whether it appears inline, as
+        a block, a flexbox, or something else. Elements have default values defined
+        for this property - for example, we already discussed that <code>div</code>
+        elements display as blocks, and <code>span</code> elements are inline by default.
+      </p>
+      <p>
+        But we can change the default behavior like below:
+      </p>
+      <pre><div style="margin-left: 50px">This is in a div. <div style="display: inline">This is in a different div but should be inline</div></div></pre>
+      <p>
+        A few common <code>display</code> values are:
+      </p>
+      <ul>
+        <li><code>inline</code> - display on the same line as other elements</li>
+        <li><code>block</code> - start on a new line and </li>
+        <li><code>flex</code> - make the element a <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout">flexbox</a></li>
+        <li><code>none</code> - do not display the element at all</li>
+      </ul>
+      <p>
+        <em>Note: you can also use the <code>visibility: hidden</code> property to hide
+        an element. <strong>The difference is that <code>display: none</code> removes the
+        element from the page completely whereas <code>visibility: hidden</code> means
+        that the tag is allocated space on the page, but just isn't seen.</strong></em>
+      </p>
+      <p>
+        The <strong><code>position</code></strong> property is another important property
+        related to layout on a webpage. It governs the flow of elements - you can
+        take elements out of the normal flow of the page to always appear on the same
+        place on the screen, to appear on top of other elements, etc.
+      </p>
+      <p>
+        Here are some <code>position</code> property values you should know:
+      </p>
+      <ul>
+        <li><code>static</code> - this is the default value, the element is placed in the normal document flow</li>
+        <li><code>relative</code> - the element occurs in its normal place, but can be moved around with <code>top</code>, <code>bottom</code>, <code>left</code>, and <code>right</code> properties</li>
+        <li><code>absolute</code> - removes the element from the normal flow of the document, fixes it in place relative to the <code>html</code> element or nearest positioned ancestor</li>
+        <li><code>fixed</code> - fixes element in place relative to browser viewport (the window)</li>
+        <li><code>sticky</code> - hybrid between <code>relative</code> and <code>fixed</code>, allowing relative positioning until scrolled to a threshold point</li>
+      </ul>
+      <p>
+        You should also be aware of the <code>top</code>, <code>bottom</code>,
+        <code>left</code>, and <code>right</code> properties - these work with all
+        <code>position</code> values except <code>static</code>. They tell where
+        to move the positioned element to. When used with <code>position: relative</code>,
+        they move the element <strong>away</strong> from the direction specified.
+        So, <code>top: 5px</code> will push the element downwards by 5 pixels.
+        Alternatively, use with <code>absolute</code> or <code>fixed</code> will
+        specify the distance from the containing element's sides. So, <code>top: 5px</code>
+        will position the element 5 pixels from the top of the containing element in
+        this context.
+      </p>
+      <p>
+        Another important layout property is <code>z-index</code>. When non-<code>static</code>
+        elements overlap, we need a way to manage which get shown on top of others.
+        Imagine in addition to horizontal and vertical x and y axes on the page,
+        that there is a "z" axis projecting out from the screen. The <code>z-index</code>
+        property controls how high on that z-axis an element is - elements with higher
+        values are displayed on top of lower-valued elements. By default, positioned
+        elements have a <code>z-index</code> of <code>0</code>.
+      </p>
+    </div>
+
+    <h2>Responsive Design</h2>
+    <div>
+      <p>
+        An important recent concept in web development is
+        <strong><a href="https://en.wikipedia.org/wiki/Responsive_web_design">responsive web design</a></strong>
+        - a way of designing web pages so that they render well on any window, screen,
+        or device size, from mobile phones to tablets to large desktop monitors.
+        Responsive web design has become increasingly important due to the share of
+        internet traffic conducted from mobile phones and devices.
+      </p>
+      <p>
+        So how do we design web pages to change based on the size of the screen?
+        There are a few ways to achieve this:
+      </p>
+      <ul>
+        <li>Use fluid grid systems - make your element containers sized with relative units like percentages instead of absolute units</li>
+        <li>Use flexible images which are also sized relatively to prevent rendering outside their container</li>
+        <li>Use <strong>media queries</strong> to change CSS based on the window size</li>
+      </ul>
+      <h3>Media Queries</h3>
+      <div>
+        <p>
+          <a href="https://en.wikipedia.org/wiki/Media_queries">Media queries</a> are
+          a way of using customized CSS for different screen sizes. They can be used
+          to respond to different media types and features. An example of the syntax
+          is shown below:
+        </p>
+        <pre>
+          <code>@media screen and (min-device-width: 500px) {
+            /* code in here only applies to screens equal or greater than 500 pixels wide */
+            width: 100%;
+          }</code>
+        </pre>
+        <p>
+          We can reverse the rule and apply our CSS only if the screen is equal to or
+          <strong>less than</strong> 500 pixels with the following media query:
+        </p>
+        <pre>
+          <code>@media screen and (max-device-width: 500px) {
+            /* code in here only applies to screens equal to or less than 500 pixels wide */
+            width: 100%;
+          }</code>
+        </pre>
+      </div>
+    </div>
+
+    <h2>@ Rules</h2>
+    <div>
+      <p>
+        A media query is one type of <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/At-rule">at-rule</a> -
+        which tell CSS what to do in some way. The most important ones are:
+      </p>
+      <ul>
+        <li><code>@media</code> - used for media queries</li>
+        <li><code>@font-face</code> - used for defining a custom font</li>
+        <li><code>@keyframes</code> - used for animations in CSS</li>
+      </ul>
+    </div>
+
+    <h2>CSS3</h2>
+    <div>
+      <p>
+        It's also important to know that <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS3">CSS3</a>
+        is the most recent version of CSS and includes several of the modern features
+        and benefits of using CSS, including:
+      </p>
+      <ul>
+        <li>rounded corners</li>
+        <li>shadows</li>
+        <li>gradients</li>
+        <li>transitions and animations</li>
+        <li>flexbox layouts</li>
+      </ul>
+    </div>
+
+    <div>
+      <p>
+        When you're ready, go to the <a href="./bootstrap4.html">next page</a> to
+        learn about a framework that makes implementing responsive web design super
+        simple, and also provides ready-made styling.
+      </p>
+    </div>
+  </body>
+</html>
