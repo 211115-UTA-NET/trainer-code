@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            var tableExpander = (function (inTableId) {
+                var numOfElements = 0;
+                var table;
+
+                var addRow = function(text) {
+                    table = document.getElementById(inTableId);
+                    numOfElements += 1; 
+                    var row = table.insertRow(numOfElements);
+                    var cell = row.insertCell(0);
+                    cell.innerHTML = text;
+                    cell = row.insertCell(0);
+                    cell.innerHTML = numOfElements;
+                }
+
+                return addRow;
+            });
+
+            var expand = tableExpander("theTable");
+        </script>
+    </head>
+    <body>
+        <table id="theTable">
+            <th>
+                <td>Row Number</td>
+                <td>Text</td>
+            </th>
+        </table>
+        <input type="button" onClick="expand('text')" value="Add Row">
+    </body>
+</html>
+
+<!-- Intro to DOM Manipulation: https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction -->
