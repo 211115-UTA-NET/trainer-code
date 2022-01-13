@@ -131,3 +131,16 @@ const myJSON = JSON.stringify(obj);
 
 // var result = newFunc(sending);
 // console.log( result)
+
+
+
+
+//Function expression 
+
+var foo = function (x) {return x+5;}
+alert("foo" + foo(2));
+
+//Function Statement/Declaration
+
+alert('bar' + bar(2));
+function bar(x) {return x+5;}
