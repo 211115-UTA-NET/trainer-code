@@ -7,8 +7,10 @@
 // with callback functions:
 function slowCalculation(a, b, successCallback, failureCallback) {
   let result = a + b;
+  successCallback(result);
   // setTimeout(() => successCallback(result), 1);
 }
+
 // ^ "library code"
 //  library code is calling back to the calling code
 // v "calling code"
