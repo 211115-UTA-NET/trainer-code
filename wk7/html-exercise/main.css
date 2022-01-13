@@ -1,0 +1,50 @@
+table
+{
+    border: 2px double black
+}
+th
+{
+    border: 3px dashed blue
+}
+td 
+{
+    border: 1px solid black
+}
+
+img 
+{
+    border-style: dashed;
+    border-width: 5px;
+    border-color: blue;
+    
+    border:  1px solid black;
+}
+.center
+{
+    color:blue; 
+    font-size: 12pt;
+}
+
+a:link { color: red;}
+a:visited {color:green;}
+a:hover { color:blue;}
+a:active {color: yellow;}
+
+a.highlight:hover {color: purple;}
+
+p::first-line
+{
+ color:green;
+ font-size: 14pt;
+}
+
+div
+{
+    background-color: lightgray;
+    width: 300px;
+    border: 15px solid green;
+    padding: 50px;
+    margin: 20px;
+    position:relative;
+    left:30px;
+}

@@ -1,5 +1,65 @@
 'use strict'
 
+
+function myFunction()
+{
+    document.getElementById("TEST").innerHTML = "this is a new paragraph";
+}
+
+function formFunction()
+{
+    var x = document.getElementById("form");
+    var text = "";
+
+
+    const person = {fname: "john" , lname: "doe"}
+
+    for ( let i in person)
+    {
+
+    text += person[i] + "<br>";
+
+    }
+
+
+    // let batch = 
+    // {
+    //     "Associates" : 
+    //     [
+    //         {
+    //             "name":["Travis"],
+    //             "lname": ["Boskowitz"]
+    //         }, 
+    //         {
+    //             "name":["Jing"],
+    //             "lname": ["Zhuang"]
+    //         },
+    //         {
+    //             "name":["Melinda"],
+    //             "lname": ["Waggoner"]
+    //         }
+    //     ]
+    // }
+
+
+let batch = '{"Associates" : [' +
+        '{"name":["Travis"], "lname": ["Boskowitz"]},' + 
+        '{"name":["Jing"], "lname": ["Zhuang"]},' +
+        '{"name":["Melinda"], "lname": ["Waggoner"]}]}'
+
+const obj = JSON.parse(batch);
+
+const myJSON = JSON.stringify(obj);
+
+    
+    document.getElementById("formOut").innerHTML = myJSON;
+};
+
+
+
+
+
+
 // var myName = 'Tommy', age = 21, message = "hello";
 // var 5windows 
 // var MyName != myName
@@ -60,14 +120,14 @@
 
 
 
-var sending = 2;
+// var sending = 2;
 
 
-function newFunc(sent)
-{
-    console.log("hi there, you sent " + sent);
-    return "success"
-}
+// function newFunc(sent)
+// {
+//     console.log("hi there, you sent " + sent);
+//     return "success"
+// }
 
-var result = newFunc(sending);
-console.log( result)
+// var result = newFunc(sending);
+// console.log( result)

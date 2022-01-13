@@ -39,7 +39,7 @@ namespace RpsConsoleApp.UI
             // better, more secure way to insert a string into a url's query string
             // with appropriate URL-encoding
             Dictionary<string, string> query = new() { ["player"] = name };
-            string requestUri = QueryHelpers.AddQueryString("/api/rounds", query);
+            string requestUri = QueryHelpers.AddQueryString("/api/rounds", query); N76AQCV Q
 
             HttpRequestMessage request = new(HttpMethod.Get, requestUri);
             // telling the server we expect application/json reply. ("content negotiation" in http/rest)
