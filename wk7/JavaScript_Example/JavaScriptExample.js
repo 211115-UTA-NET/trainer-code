@@ -13,6 +13,11 @@ document.addEventListener('DOMContentLoaded', function () {
   let newElement = document.createElement('div');
   newElement.textContent = 'added asap';
   formOut.before(newElement);
+
+  let leavePage = document.getElementById('leavepage');
+  leavePage.addEventListener('click', () => {
+    location.href = 'https://github.com' // send a GET request to that url, replace the current browser tab's page with the response
+  });
 });
 
 function myFunction() {
