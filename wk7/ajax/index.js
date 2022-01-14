@@ -11,9 +11,23 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   const loadButton = document.getElementById('load-button');
+  const loadRpsButton = document.getElementById('load-rps-button');
   const dataContainer = document.getElementById('data-container');
   const errorDisplay = document.getElementById('error-display');
   const whichDataInput = document.getElementById('which-data');
+
+
+  loadRpsButton.addEventListener('click', () => {
+    fetch(`https://localhost:7175/api/Rounds?player=${whichDataInput.value}`)
+      .then(res => {
+        if (!res.ok) throw new Error(`server error ${res.status}`);
+        return res.json();
+      })
+      .then(obj => {
+        let html = '<ul>' + obj.map(x => `<li>${x.date}</li>`).join() + '</ul>';
+        dataContainer.innerHTML = html;
+      });
+  });
 
   loadButton.addEventListener('click', () => {
     // be careful letting user input construct your URLs without validation

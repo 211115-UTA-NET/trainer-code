@@ -30,6 +30,18 @@ builder.Services.AddSwaggerGen();
 // (uses a service provider parameter to grab another dependency it needs, from the same DI container)
 builder.Services.AddSingleton<IRepository>(sp => new SqlRepository(connectionString, sp.GetRequiredService<ILogger<SqlRepository>>()));
 
+builder.Services.AddCors(options =>
+{
+    // here you put all the origins that websites making requests to this API via JS are hosted at
+    options.AddDefaultPolicy(builder =>
+        builder
+            .WithOrigins("http://127.0.0.1:5500",
+                         "https://my-example-website.azurewebsites.net")
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials());
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -42,6 +54,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors();
 
 app.UseAuthorization();
 
