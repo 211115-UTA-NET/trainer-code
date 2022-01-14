@@ -16,46 +16,75 @@ document.addEventListener('DOMContentLoaded', () => {
   const whichDataInput = document.getElementById('which-data');
 
   loadButton.addEventListener('click', () => {
-    const xhr = new XMLHttpRequest();
-
-    // define what will happen when the response is received
-    //   XHR has a readyState property - goes from 0 to 4
-    //     as the request is sent and response is received
-    //   XHR has a "readystatechange" event when it changes
-    xhr.onreadystatechange = () => {
-      // console.log(xhr.readyState);
-      // when the response is finished downloading
-      if (xhr.readyState === 4) {
-        // check status code
-        if (xhr.status >= 200 && xhr.status < 300) {
-          // success
-          errorDisplay.hidden = true;
-          console.log(xhr.status);
-          console.log(xhr.responseText);
-          let responseObj = JSON.parse(xhr.responseText);
-          displayData(responseObj, dataContainer);
-        } else {
-          // failure
-          errorDisplay.hidden = false;
-          console.log(xhr.status);
-          console.log(xhr.responseText);
-          errorDisplay.textContent = `server error: ${xhr.status}`;
-          dataContainer.textContent = '';
-        }
-      }
-    };
-
-    // set up the request (including headers, body, etc)
     // be careful letting user input construct your URLs without validation
     let url = `https://jsonplaceholder.typicode.com/users/${whichDataInput.value}`;
-    xhr.open('GET', url);
-    xhr.setRequestHeader('Accept', 'application/json');
 
-    // send the request
-    xhr.send();
-    // next thing to happen would be the readystatechange handler
+    // fetch(url, {
+    //   // method: 'GET', // default
+    //   headers: { Accept: 'application/json' },
+    //   // body: {}
+    // })
+    fetch(url)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`server error ${response.status}`);
+        }
+        return response.json(); // another promise
+      })
+      .then(obj => {
+        errorDisplay.hidden = true;
+        displayData(obj, dataContainer);
+      })
+      .catch(error => {
+        errorDisplay.hidden = false;
+        errorDisplay.textContent = error.message;
+        dataContainer.textContent = '';
+      });
+
+    // sendHttpRequest(url, xhr => {
+    //   // check status code
+    //   if (xhr.status >= 200 && xhr.status < 300) {
+    //     // success
+    //     errorDisplay.hidden = true;
+    //     console.log(xhr.status);
+    //     console.log(xhr.responseText);
+    //     let responseObj = JSON.parse(xhr.responseText);
+    //     displayData(responseObj, dataContainer);
+    //   } else {
+    //     // failure
+    //     errorDisplay.hidden = false;
+    //     console.log(xhr.status);
+    //     console.log(xhr.responseText);
+    //     errorDisplay.textContent = `server error: ${xhr.status}`;
+    //     dataContainer.textContent = '';
+    //   }
+    // });
   });
 });
+
+function sendHttpRequest(url, callback) {
+  const xhr = new XMLHttpRequest();
+
+  // define what will happen when the response is received
+  //   XHR has a readyState property - goes from 0 to 4
+  //     as the request is sent and response is received
+  //   XHR has a "readystatechange" event when it changes
+  xhr.onreadystatechange = () => {
+    // console.log(xhr.readyState);
+    if (xhr.readyState === 4) {
+      // when the response is finished downloading
+      callback(xhr);
+    }
+  };
+
+  // set up the request (including headers, body, etc)
+  xhr.open('GET', url);
+  xhr.setRequestHeader('Accept', 'application/json');
+
+  // send the request
+  xhr.send();
+  // next thing to happen would be the readystatechange handler
+}
 
 function displayData(users, dataContainer) {
   if (!(users instanceof Array)) {
@@ -73,8 +102,56 @@ function displayData(users, dataContainer) {
   let html = '<ul>';
   for (let user of users) {
     // debugger; // breakpoint
-    html += `<li>${user.name}</li>`
+    html += `<li>${user.name}</li>`;
   }
   html += '</ul>';
   dataContainer.innerHTML = html;
 }
+
+function add(a, b) {
+  return a + b;
+}
+
+let result = add(1, 2);
+console.log(result); // the thing i want to do with the result
+
+//------------------------------------
+
+function printSomething(x) {
+  console.log(x);
+}
+
+function addWithCallback(a, b, callback) {
+  let result = a + b;
+  callback(result);
+}
+
+addWithCallback(1, 2, result => {
+  console.log(result); // the thing i want to do with the result
+});
+// or
+addWithCallback(1, 2, printSomething);
+
+// addWithCallback('1', 2, 3); // throw an error,
+//  can't call a number like a function
+
+
+// c#
+// public class Program {
+//     public static void Main() {
+//         addWithCallback(1, 2, result => {
+//             Console.WriteLine(result); // the thing i want to do with the result
+//         });
+//         // or
+//         addWithCallback(1, 2, printSomething);
+//     }
+
+//     static void printSomething(int x) {
+//         Console.WriteLine(x);
+//     }
+
+//     static void addWithCallback(int a, int b, Action<int> callback) {
+//         let result = a + b;
+//         callback(result);
+//     }
+// }
