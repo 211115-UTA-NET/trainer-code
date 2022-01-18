@@ -1,0 +1,14 @@
+{
+  "name": "mynodepackage",
+  "version": "1.0.0",
+  "description": "my node package",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nicholas Escalona",
+  "license": "ISC",
+  "private": "true",
+  "devDependencies": {
+    "typescript": "^4.5.4"
+  }
+}
