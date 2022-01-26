@@ -26,20 +26,40 @@ namespace RpsApi.DataStorage
             //_logger.LogInformation($"database connection test: {(await _context.Players.FirstAsync()).Name}");
             //await PlayerExistsAsync(name);
 
+            //// example EF code for project 1 getting order history for one customer
+            //_context.Customers
+            //    .Include(c => c.Orders)
+            //        .ThenInclude(o => o.Location)
+            //    .First(c => c.Id == theId);
+
+            //// example EF code for project 1 getting order details of one order
+            //_context.Orders
+            //    .Include(o => o.Location)
+            //    .Include(o => o.Customer)
+            //    //.Include(o => o.OrderProducts)
+            //    //    .ThenInclude(op => op.Product)
+            //    .Include(o => o.OrderProducts.Product) // alternative to above two lines
+            //    .First(o => o.Id == theId);
+
             List<Model.Round> rounds = await _context.Rounds
-                .Where(r => r.Player1Navigation != null && r.Player1Navigation.Name == name)
+                .Include(r => r.Player1MoveNavigation)
+                //.ThenInclude(m => m.RoundPlayer1MoveNavigations) // if i wanted to know all the rounds that player1 used that move in
+                .Include(r => r.Player2MoveNavigation)
+                .Where(r => r.Player1Navigation!.Name == name)
                 .ToListAsync();
 
-            var neededMoveIds = rounds.SelectMany(r => new[] { r.Player1Move, r.Player2Move });
-            var neededMoves = _context.Moves.Where(m => neededMoveIds.Contains(m.Id));
+            // navigation properties represent the foreign-key-based relationships between entities
+            //   they start out as null/empty because if EF loaded them by default, it might have to load 10000s of rows
+            //    when you didn't need them all.
+            // "eager loading" is our strategy to tell EF to load specific things with ".Include" and ".ThenInclude"
 
             // need to map from the EF model to the classes the consumers of this repository expect (Logic.Round)
             // (otherwise we could just do "return rounds;")
             return rounds.Select(r =>
             {
                 // here, i have a string like "rock" and i want an enum value like Logic.Move.Rock
-                var m1 = (Logic.Move)Enum.Parse(typeof(Logic.Move), neededMoves.First(m => m.Id == r.Player1Move).Name);
-                var m2 = (Logic.Move)Enum.Parse(typeof(Logic.Move), neededMoves.First(m => m.Id == r.Player2Move).Name);
+                var m1 = (Logic.Move)Enum.Parse(typeof(Logic.Move), r.Player1MoveNavigation!.Name);
+                var m2 = (Logic.Move)Enum.Parse(typeof(Logic.Move), r.Player2MoveNavigation!.Name);
                 return new Logic.Round(r.Timestamp, m1, m2);
             });
         }
