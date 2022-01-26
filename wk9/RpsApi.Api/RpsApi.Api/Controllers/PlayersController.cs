@@ -32,8 +32,7 @@ namespace RpsApi.Api.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            return null;
-            //_repository.
+            throw new NotImplementedException();
         }
     }
 }

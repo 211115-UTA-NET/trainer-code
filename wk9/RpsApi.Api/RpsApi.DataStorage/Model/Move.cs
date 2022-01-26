@@ -1,20 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace RpsApi.DataStorage.Model
+﻿namespace RpsApi.DataStorage.Model
 {
-    public partial class Move
+    public class Move
     {
-        public Move()
+        public Move(string name)
         {
-            RoundPlayer1MoveNavigations = new HashSet<Round>();
-            RoundPlayer2MoveNavigations = new HashSet<Round>();
+            Name = name;
         }
 
         public int Id { get; set; }
-        public string Name { get; set; } = null!;
+        public string Name { get; set; }
 
-        public virtual ICollection<Round> RoundPlayer1MoveNavigations { get; set; }
-        public virtual ICollection<Round> RoundPlayer2MoveNavigations { get; set; }
+        // you don't need to put any navigation properties you know you won't need to ever use
+        // you'll need at least ONE of the two, so that EF can recognize the FK relationship
+
+        // .... except due to a variety of reasons
+        public ICollection<Round> RoundsUsedByPlayer1 { get; set; }
+        public ICollection<Round> RoundsUsedByPlayer2 { get; set; }
     }
 }

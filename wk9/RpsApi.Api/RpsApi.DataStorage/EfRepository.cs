@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using RpsApi.DataStorage.Model;
-using RpsApi.Logic;
 
 namespace RpsApi.DataStorage
 {
@@ -44,11 +38,11 @@ namespace RpsApi.DataStorage
             //await _context.Moves
             //    .FirstAsync(m => m.Name == "paper");
 
-            List <Model.Round> rounds = await _context.Rounds
-                .Include(r => r.Player1MoveNavigation)
+            List<Model.Round> rounds = await _context.Rounds
+                .Include(r => r.Player1Move)
                 //.ThenInclude(m => m.RoundPlayer1MoveNavigations) // if i wanted to know all the rounds that player1 used that move in
-                .Include(r => r.Player2MoveNavigation)
-                .Where(r => r.Player1Navigation!.Name == name)
+                .Include(r => r.Player2Move)
+                .Where(r => r.Player1!.Username == name)
                 .ToListAsync();
 
             // navigation properties represent the foreign-key-based relationships between entities
@@ -80,8 +74,8 @@ namespace RpsApi.DataStorage
             return rounds.Select(r =>
             {
                 // here, i have a string like "rock" and i want an enum value like Logic.Move.Rock
-                var m1 = (Logic.Move)Enum.Parse(typeof(Logic.Move), r.Player1MoveNavigation!.Name);
-                var m2 = (Logic.Move)Enum.Parse(typeof(Logic.Move), r.Player2MoveNavigation!.Name);
+                var m1 = (Logic.Move)Enum.Parse(typeof(Logic.Move), r.Player1Move!.Name);
+                var m2 = (Logic.Move)Enum.Parse(typeof(Logic.Move), r.Player2Move!.Name);
                 return new Logic.Round(r.Timestamp, m1, m2);
             });
         }
@@ -94,7 +88,17 @@ namespace RpsApi.DataStorage
             {
                 secondPlayer = await EnsurePlayerExistsAsync(player2);
             }
-            throw new NotImplementedException();
+            Move move1 = await _context.Moves.FirstAsync(m => m.Name == round.Player1.ToString());
+            Move move2 = await _context.Moves.FirstAsync(m => m.Name == round.Player2.ToString());
+            _context.Rounds.Add(new()
+            {
+                Timestamp = round.Date,
+                Player1 = firstPlayer,
+                Player2 = secondPlayer,
+                Player1Move = move1,
+                Player2Move = move2
+            });
+            await _context.SaveChangesAsync();
         }
 
         public async Task<bool> PlayerExistsAsync(string player)
@@ -104,14 +108,14 @@ namespace RpsApi.DataStorage
 
             // EF automatically SQL-escapes any strings involved, preventing SQL injection.
             // it also uses SqlParameters for any variables used in the query, further preventing SQL injection
-            return await _context.Players.AnyAsync(p => p.Name == player);
+            return await _context.Players.AnyAsync(p => p.Username == player);
             // little micro-optimization: if an async method's only "await" is right at the return statement
             //     then you can skip the await and the method doesn't need to be async (return the Task directly)
         }
 
         public async Task<Player> EnsurePlayerExistsAsync(string name)
         {
-            if (await _context.Players.FirstOrDefaultAsync(p => p.Name == name) is Player player)
+            if (await _context.Players.FirstOrDefaultAsync(p => p.Username == name) is Player player)
             {
                 return player;
             }
@@ -122,7 +126,7 @@ namespace RpsApi.DataStorage
 
             // don't set the ID... leave it at default 0
             // the context interprets default values of primary keys (like 0) as meaning "new row" instead of "modified row"
-            var newPlayer = new Player { Name = name };
+            var newPlayer = new Player(name);
 
             // add entity to dbset. this does not generate any sql, the pending operation is stored ready to go in the context.
             _context.Players.Add(newPlayer);
