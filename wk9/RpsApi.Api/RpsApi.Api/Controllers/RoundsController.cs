@@ -12,6 +12,7 @@ namespace RpsApi.Api.Controllers
     [ApiController]
     public class RoundsController : ControllerBase
     {
+        private readonly IMoveDecider _moveDecider;
         private readonly IRepository _repository;
         private readonly ILogger<RoundsController> _logger;
 
@@ -19,8 +20,9 @@ namespace RpsApi.Api.Controllers
         // with some parameters like this, not just a zero-argument constructor
         // yes it can, it has a "dependency injector" aka DI container aka IServiceCollection
         //     configured at the top of Program.cs
-        public RoundsController(IRepository repository, ILogger<RoundsController> logger)
+        public RoundsController(IMoveDecider moveDecider, IRepository repository, ILogger<RoundsController> logger)
         {
+            _moveDecider = moveDecider;
             _repository = repository;
             _logger = logger;
         }
@@ -86,18 +88,24 @@ namespace RpsApi.Api.Controllers
         {
             // example of custom validation that attributes can't do
             // validate all user input, whether with attributes or not, whether it needs to check the database or not
-            if (!await _repository.PlayerExistsAsync(move.Player1Name!))
-            {
-                // could use the ProblemDetails format like the auto validation messages, or just simple like this
-                return BadRequest($"player {move.Player1Name} does not exist");
-            }
-            if (!await _repository.PlayerExistsAsync(move.Player2Name!))
-            {
-                return BadRequest($"player {move.Player2Name} does not exist");
-            }
+            //if (!await _repository.PlayerExistsAsync(move.Player1Name!))
+            //{
+            //    // could use the ProblemDetails format like the auto validation messages, or just simple like this
+            //    return BadRequest($"player {move.Player1Name} does not exist");
+            //}
+            //if (!await _repository.PlayerExistsAsync(move.Player2Name!))
+            //{
+            //    return BadRequest($"player {move.Player2Name} does not exist");
+            //}
 
             // proceed with adding the move
-            return StatusCode(500);
+            Move cpuMove = _moveDecider.DecideMove();
+            Round round = new(DateTimeOffset.Now, move.Move, cpuMove);
+            await _repository.AddNewRoundAsync(move.Player1Name!, move.Player2Name, round);
+
+            // if i had a URL for getting 1 round, i should use 201 Created here, and make sure
+            //  that URL gets generated right (probably with the CreatedAtAction method)
+            return Ok(round);
         }
 
 

@@ -9,7 +9,7 @@ namespace RpsApi.Api.Dtos
         //[StringLength(100, MinimumLength = 5)]
         public string? Player1Name { get; set; }
 
-        [Required]
+        //[Required]
         public string? Player2Name { get; set; }
 
         [Required]

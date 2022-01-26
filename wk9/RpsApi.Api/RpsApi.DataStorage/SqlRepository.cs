@@ -66,17 +66,17 @@ namespace RpsApi.DataStorage
             return result;
         }
 
-        public void AddNewRound(string? player1, string? player2, Round round)
+        public async Task AddNewRoundAsync(string? player1, string? player2, Round round)
         {
             using SqlConnection connection = new(_connectionString);
-            connection.Open();
+            await connection.OpenAsync();
 
             // handle it if the player doesn't exist yet
             // (would maybe make more sense for the player creation to be done
             // in advance of calling this method, and this method gets to assume
             // it's already been done)
-            int? player1Id = player1 is null ? null : EnsurePlayerExistsAndGetId(connection, player1);
-            int? player2Id = player2 is null ? null : EnsurePlayerExistsAndGetId(connection, player2);
+            int? player1Id = player1 is null ? null : await EnsurePlayerExistsAndGetIdAsync(connection, player1);
+            int? player2Id = player2 is null ? null : await EnsurePlayerExistsAndGetIdAsync(connection, player2);
 
             // assume the move exist already in the DB
             string cmdText = @"INSERT INTO Rps.Round (Timestamp, Player1, Player2, Player1Move, Player2Move)
@@ -92,9 +92,9 @@ namespace RpsApi.DataStorage
             cmd.Parameters.AddWithValue("@p1move", round.Player1.ToString());
             cmd.Parameters.AddWithValue("@p2move", round.Player2.ToString());
 
-            cmd.ExecuteNonQuery();
+            await cmd.ExecuteNonQueryAsync();
 
-            connection.Close();
+            await connection.CloseAsync();
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace RpsApi.DataStorage
         /// <param name="connection">An open connection</param>
         /// <param name="name">The player's name</param>
         /// <returns>ID of player</returns>
-        public int EnsurePlayerExistsAndGetId(SqlConnection connection, string name)
+        public async Task<int> EnsurePlayerExistsAndGetIdAsync(SqlConnection connection, string name)
         {
             string cmdText = @"SELECT Id
                                FROM Rps.Player
@@ -112,9 +112,9 @@ namespace RpsApi.DataStorage
             {
                 cmd.Parameters.AddWithValue("@playername", name);
 
-                using SqlDataReader reader = cmd.ExecuteReader();
+                using SqlDataReader reader = await cmd.ExecuteReaderAsync();
 
-                if (reader.Read())
+                if (await reader.ReadAsync())
                 {
                     return reader.GetInt32(0);
                 }
@@ -127,9 +127,9 @@ namespace RpsApi.DataStorage
             using SqlCommand cmd2 = new(cmd2Text, connection);
             cmd2.Parameters.AddWithValue("@playername", name);
 
-            using SqlDataReader reader2 = cmd2.ExecuteReader();
+            using SqlDataReader reader2 = await cmd2.ExecuteReaderAsync();
 
-            reader2.Read();
+            await reader2.ReadAsync();
             return reader2.GetInt32(0);
         }
 

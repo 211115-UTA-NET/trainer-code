@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using RpsApi.DataStorage;
 using RpsApi.DataStorage.Model;
+using RpsApi.Logic;
 
 //string connectionString = await File.ReadAllTextAsync("C:/revature/DEMO_RPS_CS.txt");
 
@@ -35,9 +36,11 @@ builder.Services.AddSwaggerGen();
 //   that's good because DbContext is not threadsafe.
 builder.Services.AddDbContext<RPSContext>(options =>
 {
-    // logging to console is on by default?
+    // logging to console is on by default
     options.UseSqlServer(connectionString);
 });
+
+builder.Services.AddSingleton<IMoveDecider, RandomMoveDecider>();
 
 if (builder.Configuration.GetValue<string>("UseEf") == "true")
 {
