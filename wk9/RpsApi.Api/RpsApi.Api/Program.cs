@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.EntityFrameworkCore;
 using RpsApi.DataStorage;
+using RpsApi.DataStorage.Model;
 
 //string connectionString = await File.ReadAllTextAsync("C:/revature/DEMO_RPS_CS.txt");
 
@@ -26,9 +28,30 @@ builder.Services.AddControllers(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 // provide any other dependencies that, e.g., the controllers need injected into them
-// "if anyone asks for an IRepository, run this lambda expression"
-// (uses a service provider parameter to grab another dependency it needs, from the same DI container)
-builder.Services.AddSingleton<IRepository>(sp => new SqlRepository(connectionString, sp.GetRequiredService<ILogger<SqlRepository>>()));
+
+// set up our context for dependency injection
+// in "scoped" lifetime by default, not singleton,
+//   which means, a new instance will be made of each HTTP request that is handled.
+//   that's good because DbContext is not threadsafe.
+builder.Services.AddDbContext<RPSContext>(options =>
+{
+    // logging to console is on by default?
+    options.UseSqlServer(connectionString);
+});
+
+if (builder.Configuration.GetValue<string>("UseEf") == "true")
+{
+    // because the context is scoped lifetime, the other service that needs it (EfRepository)
+    //   also needs to be scoped lifetime (or transient).
+    // (don't need a delegate here to tell it how to make the class, it can figure it out in this case
+    builder.Services.AddScoped<IRepository, EfRepository>();
+}
+else
+{
+    // "if anyone asks for an IRepository, run this lambda expression"
+    // (uses a service provider parameter to grab another dependency it needs, from the same DI container)
+    builder.Services.AddSingleton<IRepository>(sp => new SqlRepository(connectionString, sp.GetRequiredService<ILogger<SqlRepository>>()));
+}
 
 builder.Services.AddCors(options =>
 {
