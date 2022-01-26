@@ -23,7 +23,10 @@ namespace RpsApi.DataStorage
 
         public async Task<IEnumerable<Logic.Round>> GetAllRoundsOfPlayerAsync(string name)
         {
-            _logger.LogInformation($"database connection test: {(await _context.Players.FirstAsync()).Name}");
+            //_logger.LogInformation($"database connection test: {(await _context.Players.FirstAsync()).Name}");
+
+            await PlayerExistsAsync(name);
+
             throw new NotImplementedException();
         }
 
@@ -32,9 +35,13 @@ namespace RpsApi.DataStorage
             throw new NotImplementedException();
         }
 
-        public Task<bool> PlayerExistsAsync(string player)
+        public async Task<bool> PlayerExistsAsync(string player)
         {
-            throw new NotImplementedException();
+            //var x = player;
+            //return await _context.Players.AnyAsync(p => p.Name == "nick') END; DROP TABLE Rps.Player;");
+            return await _context.Players.AnyAsync(p => p.Name == player);
+            // little micro-optimization: if an async method's only "await" is right at the return statement
+            //     then you can skip the await and the method doesn't need to be async (return the Task directly)
         }
     }
 }
