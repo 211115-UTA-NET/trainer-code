@@ -2,6 +2,12 @@
   <span>{{ title }} app is running!</span>
 </div>
 
+<input type="text" [(ngModel)]="postId">
+<button (click)="showComments()"></button>
+<ol>
+  <li *ngFor="let comment of comments">{{ comment.name }}</li>
+</ol>
+
 <app-child [data]="title"></app-child>
 
 <router-outlet></router-outlet>
