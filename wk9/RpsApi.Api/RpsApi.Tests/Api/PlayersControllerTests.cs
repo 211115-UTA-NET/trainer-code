@@ -51,7 +51,7 @@ namespace RpsApi.Tests.Api
         }
 
         [Fact]
-        public async void CreatePlayerWithDbUpdateExceptionReturn500()
+        public async void CreatePlayerWithDbUpdateExceptionReturnHttpConflict()
         {
             // arrange
             string playerName = "asdf";
@@ -64,8 +64,7 @@ namespace RpsApi.Tests.Api
             IActionResult result = await controller.Add(playerName);
 
             // assert
-            ObjectResult objectResult = Assert.IsAssignableFrom<ObjectResult>(result);
-            Assert.Equal(expected: 409, actual: objectResult.StatusCode);
+            Assert.IsAssignableFrom<ConflictResult>(result);
         }
     }
 }

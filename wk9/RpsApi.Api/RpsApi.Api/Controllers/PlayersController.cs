@@ -32,14 +32,14 @@ namespace RpsApi.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            throw new NotImplementedException();
+            return Ok(await _repository.GetAllPlayersAsync());
         }
 
         // POST /api/players
         [HttpPost]
         public async Task<IActionResult> Add(string name)
         {
-            throw new NotImplementedException();
+            return Conflict();
         }
     }
 }
