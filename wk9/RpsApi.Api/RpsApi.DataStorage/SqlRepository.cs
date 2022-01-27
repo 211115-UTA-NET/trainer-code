@@ -152,5 +152,15 @@ namespace RpsApi.DataStorage
                 return await reader.ReadAsync();
             }
         }
+
+        public Task<IEnumerable<string>> GetAllPlayersAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task AddPlayerAsync(string player)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

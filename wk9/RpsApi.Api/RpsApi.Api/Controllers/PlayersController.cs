@@ -30,7 +30,14 @@ namespace RpsApi.Api.Controllers
 
         // GET /api/players
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        // POST /api/players
+        [HttpPost]
+        public async Task<IActionResult> Add(string name)
         {
             throw new NotImplementedException();
         }

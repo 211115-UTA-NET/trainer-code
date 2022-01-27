@@ -162,5 +162,15 @@ namespace RpsApi.DataStorage
 
             return newPlayer;
         }
+
+        public Task<IEnumerable<string>> GetAllPlayersAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task AddPlayerAsync(string player)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
